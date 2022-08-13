@@ -1,0 +1,12 @@
+.profile-photo{
+	width: 2.7rem;
+	aspect-ratio: 1/1;
+	border-radius: 40%;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+img{
+	display: block;
+	width: 100%;
+}

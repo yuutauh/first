@@ -1,0 +1,141 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    match /threads/{threadId} {
+      allow read;
+      allow create: if isSignedIn() &&
+                    isThreadValidate(request.resource.data)
+                    && request.resource.data.id == threadId;
+                    
+      allow update: if isSignedIn() &&
+                    isThreadValidate(request.resource.data)
+                       
+      allow delete: if isSignedIn() &&
+                       isOwner(resource.data);
+      
+      match /comments/{commentId} {
+         allow read;
+         allow create: if isSignedIn() &&
+                        isCommentValidate(request.resource.data);
+         allow update: if isSignedIn() &&
+                       isCommentValidate(request.resource.data)
+     }
+    }
+    
+    match /tags/{tagsId} {
+      allow read;
+      allow create: if isSignedIn() &&
+                    isTagValidate(request.resource.data)&&
+                    request.resource.data.id == tagsId ;
+      allow update: if isSignedIn() &&
+                    isTagValidate(request.resource.data)
+    }
+    
+    match /followings/{followingId} {
+      allow read;
+      allow create: if isSignedIn() &&
+                   isFavoritesValidate(request.resource.data) &&
+                   request.resource.data.followed
+                   + 
+                   request.resource.data.following 
+                   == followingId ;
+      allow delete: if isSignedIn() &&
+                   request.auth.uid == resource.data.following || 
+                   request.auth.uid == resource.data.followed
+    }
+    
+    match /trends/{trendsId} {
+      allow read;
+      allow write: if isSignedIn();
+    }
+    
+    match /users/{users} {
+      allow read;
+      allow create: if isSignedIn();
+      allow update: if request.auth.uid == resource.data.uid
+    }
+    
+    function isSignedIn() {
+        return request.auth != null;
+    }
+    
+    function isOwner(newData) {
+        return request.auth.uid == newData.uid
+    }
+    
+    function isThreadValidate(thread){
+        return thread.size() == 11
+        && 'bads' in thread 
+        &&  thread.bads is list
+        && 'badCount' in thread
+        && thread.badCount is int
+        && 'body' in thread
+        && thread.body is string
+        && 'created' in thread 
+        && thread.created is timestamp
+        && 'favorites' in thread
+        && thread.favorites is list
+        && 'favoriteCount' in thread
+        && thread.favoriteCount is int
+        && 'id' in thread 
+        && thread.id is string
+        && 'tagname' in thread
+        && thread.tagname is list
+        && 'uid' in thread 
+        && thread.uid is string
+        && 'username' in thread
+        && thread.username is string
+        && 'userimage' in thread
+        && thread.userimage is string
+    }
+    
+    function isCommentValidate(comment){
+        return comment.size() == 10 
+        && 'bads' in comment 
+        &&  comment.bads is list
+        && 'badCount' in comment
+        && comment.badCount is int
+        && 'comment' in comment
+        && comment.comment is string
+        && 'created' in comment 
+        && comment.created is timestamp
+        && 'favorites' in comment
+        && comment.favorites is list
+        && 'favoriteCount' in comment
+        && comment.favoriteCount is int
+        && 'id' in comment
+        && comment.id is string
+        && 'uid' in comment
+        && comment.uid is string
+        && 'username' in comment
+        && comment.username is string
+        && 'userimage' in comment
+        && comment.userimage is string
+    }
+    
+    function isTagValidate(tag){
+      return tag.size() == 5
+      && 'created' in tag
+      && tag.created is timestamp
+      && 'id' in tag
+      && tag.id is string
+      && 'name' in tag
+      && tag.name is string
+      && 'threadId' in tag
+      && tag.threadId is list
+      && 'userId' in tag
+      && tag.userId is list
+    }
+    
+    function isFavoritesValidate(favorite){
+      return favorite.size() == 2
+      && 'following' in favorite
+      && favorite.following is string
+      && 'followed' in favorite
+      && favorite.followed is string
+    }
+    
+    
+  }
+}

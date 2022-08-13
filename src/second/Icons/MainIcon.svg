@@ -1,0 +1,6 @@
+<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="300" height="300" fill="none"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M225 133C225 174.421 191.421 208 150 208C150 208 151.235 204.942 150 201.97V183C177.614 183 200 160.614 200 133C200 105.386 177.614 83 150 83C122.386 83 100 105.386 100 133H75C75 91.5786 108.579 58 150 58C191.421 58 225 91.5786 225 133Z" fill="black"/>
+<circle cx="150" cy="133" r="25" fill="black"/>
+<path d="M140 183H160V239H140V183Z" fill="black"/>
+</svg>

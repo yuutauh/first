@@ -1,0 +1,60 @@
+
+
+.trend-container .trend-heading {
+	display: flex;
+	align-items: center;
+	margin: 0.5rem 0;
+}
+
+.trend-container .trend-heading h3 {
+	letter-spacing: 0.2rem;
+}
+
+.trend-container .trend-heading svg {
+	width: 1.8rem;
+}
+
+.trend-container  a{
+	display: flex;
+	align-items: center;	
+	justify-content: space-between;
+	flex-wrap: wrap;
+	padding: 0.75rem ;
+	letter-spacing: 0.2rem;
+	border-bottom: 1px solid var(--dribbble-first);
+} 
+
+.trend-container  a:hover{
+	background-color: var(--dribbble-first);
+} 
+
+.trend-container a > div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0.5rem 0;
+}
+
+.trend-container  a .name {
+	margin:0 1rem;	
+}
+
+.trend-container  a .name span {
+	font-weight: 900;
+}
+
+.trends-container .heading {
+	display: flex;
+	align-items: center;
+	margin: 0.5rem 0;
+}
+
+.trends-container .trends-title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.trends-container .trends-title h5 {
+	letter-spacing: 0.2rem;
+}

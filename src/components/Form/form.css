@@ -1,0 +1,107 @@
+.canvas {
+	position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 90vh;
+}
+
+.after{
+	position:relative;
+}
+
+.after::after{
+	content: '消す';
+	position: absolute;
+	font-size: 1rem;
+	top: 100%;
+}
+
+.after:nth-child(2)::after{
+	content: '再描画';
+}
+
+.after:nth-child(3)::after{
+	content: '保存';
+}
+
+.form-body-appear {
+	transform: translateY(100%);
+}
+
+.form-body-appear-active {
+	transform: translateY(0%);
+	transition: 0.6s;
+}
+
+/* .form-body-exit {
+	transform: translateY(0%);
+}
+
+.form-body-exit-active {
+	transform: translateY(110%);
+	transition: transform 0.6s ease-in-out;
+} */
+
+/* .form-body-enter {
+	transform: translateY(-110%);
+}
+
+.form-body-enter-active {
+	transform: translateY(0%);
+	transition: transform 0.6s ease-in-out;
+} */
+
+.form-canvas-enter {
+	transform: translateY(110%)
+}
+
+.form-canvas-enter-active {
+	transform: translateY(0%);
+	transition: 0.6s;
+}
+
+/* .form-canvas-exit {
+	transform: translateY(0%);
+}
+
+.form-canvas-exit-active {
+	transform: translateY(110%);
+	transition: 0.6s;
+} */
+
+.form-tag-enter {
+	transform: translateY(110%)
+}
+
+.form-tag-enter-active {
+	transform: translateY(0%);
+	transition: 0.6s;
+}
+
+/* .form-tag-exit {
+	transform: translateY(0%);
+}
+
+.form-tag-exit-active {
+	transform: translateY(110%);
+	transition: 0.6s;
+} */
+
+.form-complete-enter {
+	transform: translateY(110%)
+}
+
+.form-complete-enter-active {
+	transform: translateY(0%);
+	transition: 0.6s;
+}
+
+.form-complete-exit {
+	transform: translateY(0%);
+}
+
+.form-complete-exit-active {
+	transform: translateY(110%);
+	transition: 0.6s;
+}

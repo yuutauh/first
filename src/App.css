@@ -1,38 +1,158 @@
-.App {
-  text-align: center;
+*{
+	box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* body {
+	margin: 0;
+	padding: 0;
+    background-color: #fafafa;
+	font-feature-settings: "palt";
+    -webkit-font-smoothing: antialiased;
+    font-family: 游ゴシック, "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, "ＭＳ ゴシック", sans-serif;
+    color: rgb(35, 25, 22);
+    letter-spacing: 0.3em;
+	font-size: 12px;
+    font-weight: bold;
+} */
+
+body::-webkit-scrollbar {
+	width: 0.25rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body::-webkit-scrollbar-track {
+	background-color: #1e1e24 ;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+body::-webkit-scrollbar-thumb {
+	background-color: #6649b8 ;
 }
 
-.App-link {
-  color: #61dafb;
+/* :root {
+	--bg: #242526;
+	--bg-accent: #484a4b;
+	--text-color: #dadcel;
+	--navsize: 60px;
+	--border: 1px solid #474a4d;
+	--border-radius: 8px;
+	--speed: 500ms;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
+
+a {
+	color: var(--text-color);
+	text-decoration: none;
+}
+
+
+
+.navbar {
+	height: var(--navsize);
+	background-color: var(--bg);
+	padding: 0 1rem;
+	border-bottom: var(--border) ;
+}
+
+.navbar-nav {
+	max-width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.nav-item {
+	width: calc(var(--navsize) * 0.8 );
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.icon-button {
+	width: calc(var(--navsize) * 0.7 );
+	height: calc(var(--navsize) * 0.7 );
+	background-color: #474a4d;
+	border-radius: 50%;
+	padding: 5px;
+	margin: 2px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: filter 300ms ease;
+}
+
+.icon-button:hover {
+	filter: brightness(1.2)
+}
+
+.dropdown {
+	position: absolute ;
+	top: 58px;
+	width: 300px;
+	transform: translateX(-45%);
+	background-color: var(--bg);
+	border-radius: var(--border-radius);
+	padding: 1rem;
+	overflow: hidden;
+}
+
+.menu-item {
+	height: 50px;
+	padding: 0.5rem;
+	transition: background var(--speed);
+	border-radius: var(--border-radius);
+	display: flex;
+	align-items: center;
+}
+
+.menu-item:hover {
+	background-color: #525357;
+}
+
+.menu {
+	width: 100%;
+}
+
+.menu-primary-enter {
+	position: absolute;
+	transform: translateX(-110%) ;
+}
+
+.menu-primary-enter-active {
+	transform: translateX(0%);
+	transition: all var(--speed) ease ;
+}
+
+.menu-primary-exit {
+	transform: translateX(0%);
+	transition: all var(--speed) ease ;
+}
+
+.menu-primary-exit-active {
+	transform: translateX(-110%);
+	transition: all var(--speed) ease ;
+}
+
+.menu-secondary-enter {
+	position: absolute;
+	transform: translateX(110%) ;
+}
+
+.menu-secondary-enter-active {
+	transform: translateX(0%);
+	transition: all var(--speed) ease ;
+}
+
+.menu-secondary-exit {
+	transform: translateX(0%);
+	transition: all var(--speed) ease ;
+}
+
+.menu-secondary-exit-active {
+	transform: translateX(110%);
+	transition: all var(--speed) ease ;
+}  */
+

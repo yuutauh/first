@@ -1,0 +1,141 @@
+.input-container {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.input-container .error{
+	color: red;
+	font-size: 0.8rem;
+}
+
+.input-container .material-icons {
+	font-weight: 100;
+	font-size: 1rem;
+}
+
+.input-container .search-bar{
+	width: fit-content;
+	margin-bottom: 0.5rem;
+}
+
+.input-container .search-bar .uil-search{
+	border-left: 1px solid black;
+	padding: 0 1rem;
+}
+
+.input-container .search-bar input[type="search"] {
+	margin: 0 0.5rem;
+	color: black;
+}
+
+.input-container .tags-pagination {
+	display: flex;
+	align-items: center;
+}
+
+.input-container .tags-pagination i {
+	font-size: 2rem;
+	background-color: var(--dribbble-first);
+	border-radius: 50%;
+}
+
+.input-container .tags {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+
+.input-container .tag {
+	width: fit-content;
+	font-size: 0.75rem;
+	font-weight: 400;
+	padding: 0.25rem 0.75rem;
+	background-color: var(--dribbble-first);
+	margin: 0.25rem;
+	border-radius: 0.6rem;
+	letter-spacing: 0.2rem;
+}
+
+.input-container .unselected{
+	background: transparent ;
+	border: 1px solid var(--dribbble-first);
+}
+
+.input-container .tags .tag::before{
+	content: '#';
+}
+
+.inputTag-container {
+	border: 1px solid var(--dribbble-second);
+	border-radius: var(--card-border-radius);
+	padding: var(--card-padding);
+	margin: 1rem 0;
+}
+
+.inputtext-container {
+	padding: var(--card-padding);
+	margin: 1rem 0;
+    font-size: 0.75rem;
+	font-weight: 300;
+	line-height: 1.5;
+	border: 1px solid var(--dribbble-second);	
+	border-radius: var(--card-border-radius);
+}
+
+.inputtext-container .head{
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.inputtext-container .head h3{
+	font-weight: 300;
+}
+
+.inputtext-container .tags {
+	display: flex;
+	align-items: center;
+	justify-content:start;
+	flex-wrap: wrap;
+	margin: 0.5rem 0;
+}
+
+.input-container .msg-container {
+	border-radius: var(--card-border-radius);
+	padding: 2rem 2rem;
+	position: relative;
+	font-weight: 900;
+	letter-spacing: 0.2rem;
+    word-break: break-all;
+	border: 1px solid var(--dribbble-first);
+}
+
+textarea {
+	width: 100%;
+	padding: 4rem 2rem;
+	resize: none;
+	font-weight: 900;
+	letter-spacing: 0.2rem;
+	font-family: inherit;
+}
+
+
+textarea::-webkit-scrollbar{
+	display: none;
+}
+
+.input-container button {
+	display: inline-block;
+	padding: var(--btn-padding);
+	margin: 1rem;
+	font-weight: 700;
+	border-radius: var(--border-radius);
+	cursor: pointer;
+	transition: all 300ms ease;
+	letter-spacing: 0.3rem;
+}
+
+.input-container button:hover {
+	opacity: 0.8;
+}
