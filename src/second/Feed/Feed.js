@@ -16,7 +16,7 @@ const Feed = ({
 	
 	return (
 		<div key={i} className="feed">
-			<div className="head">
+			<div className="head mosaic">
 				<div className="profile-photo">
                     <img src={userimage} alt="unsplash" />
                 </div>
