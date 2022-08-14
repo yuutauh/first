@@ -68,7 +68,7 @@ const Login = () => {
 	return (
 		<div className="main-container">
 			<div className="login-container">
-				<h1>Log in</h1>
+				<h1>Logggg in</h1>
 					<button onClick={authWithGoogle}>
 						<GoogleIcon />
 						Sign in with Google
