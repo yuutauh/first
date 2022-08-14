@@ -8,9 +8,9 @@ const Nav = () => {
 	const [open ,setOpen] = useState(false);
 	const { currentUser }  = useContext(AuthContext);
 
-	const addOpen = () => {
-		setOpen(!open)
-	}
+	// const addOpen = () => {
+	// 	setOpen(!open)
+	// }
 
 	return (
 		<nav>
@@ -21,7 +21,7 @@ const Nav = () => {
 			      <MainIcon />
 				  <div>ano emo</div>
 			  </div>
-			  <div onClick={addOpen} className="search-bar">
+			  <div  className="search-bar">
 					<i className="uil uil-search"></i>
 					<input type="search" placeholder="検索" />
 			  </div>
