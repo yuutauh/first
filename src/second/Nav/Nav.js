@@ -19,7 +19,7 @@ const Nav = () => {
 			>
 			  <div className="title">
 			      <MainIcon />
-				  <div>ano emo</div>
+				  <div>only text</div>
 			  </div>
 			  <div  className="search-bar">
 					<i className="uil uil-search"></i>
