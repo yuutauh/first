@@ -19,7 +19,6 @@ const Trends = () => {
 			setTags(items);
 		});
 	}, []);
-	console.log(tags)
 
 	return (
 		<div className="trends-container">

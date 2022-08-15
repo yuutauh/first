@@ -41,9 +41,9 @@ const Home = () => {
 							<Route path="/profile">
 								<Profile />
 							</Route>
-							<Route path="/trendindex">
-								<TrendIndex />
-							</Route>
+							{/* <Route path="/trendindex">
+								 <TrendIndex /> 
+							</Route> */}
 							<Route path="/tagindex">
 								<TagIndex />
 							</Route>
