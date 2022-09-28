@@ -43,12 +43,27 @@ a {
 	color: inherit;
 }
 
+
+
 body {
-	font-family: 'Noto Sans JP', 'Raleway', sans-serif;
+	font-family: 'Poppins';
 	color: var(--dribbble-black);
 	background-color: var(--color-white);
 	overflow-x: hidden;
 }
+
+body:before{
+	content:"";
+	display:block;
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:-1;
+	width:100%;
+	height:100vh;
+	background:url(https://source.unsplash.com/75xPHEQBmvA) center no-repeat;
+	background-size:cover;
+  }
 
 .btn{
 	display: inline-block;
@@ -70,7 +85,7 @@ body {
 }
 
 .text-muted{
-	color: var(--color-gray);
+	color: hsl(252deg 7% 33%);
 }
 
 .text-smaller{
@@ -83,13 +98,17 @@ body {
 	filter: blur(4px);
 }
 
+.uil-arrow-left {
+	font-size: 2rem;
+}
+
 nav {
 	position: fixed;
 	width: 100%;
-	padding: 0.8rem 0;
-	border-bottom: 1px solid var(--dribbble-first);
+	padding: 0.5rem 0;
 	z-index: 11;
-	background-color: rgba(255, 255, 255, 0.85);
+	/* background-color: rgba(255, 255, 255, 0.85); */
+	background-color: transparent;
 	transition: all 900ms ease ;
 }
 
@@ -112,14 +131,17 @@ nav {
 	display: flex;
 	align-items: center;
 	font-size: 1.5rem;
-	letter-spacing: 0.5rem;
-	font-family: var(--en-font-family);
+	letter-spacing: 0.3rem;
 }
 
 .title svg {
 	width: 2rem;
 	height: 2rem;
 	margin-right: 1rem;
+}
+
+.title > div {
+	font-family: Poppins;
 }
 
 .loadButton {
@@ -130,7 +152,7 @@ nav {
 .search-bar {
 	background-color: var(--color-light);
 	border-radius: var(--border-radius);
-	padding: var(--search-padding);
+	padding: 0 1rem;
 }
 
 .search-bar input[type="search"]{
@@ -149,9 +171,81 @@ nav .search-bar {
 	transform: translateX(-10%);
 }
 
+.nav-login-c {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.nav-login-c  i {
+	font-size: 1.2rem;
+}
+
+.dropdown__lists {
+    /* display: none; */
+	font-family: 'Poppins';
+    width: 60%;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    padding: 10px;
+    background: #fafafad6;
+    box-shadow: 0 2px 4px #4385bb12;
+    border-radius: 10px;
+	transform: scaleY(0);/*デフォルトでは非表示の状態にしておく*/
+    transform-origin: center top;
+    transition: all .3s;/*表示の変化を0.3秒に指定*/
+}
+
+.open__dropdown__lists {
+    /* display: block; */
+	font-family: 'Poppins';
+    width: 60%;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    padding: 10px;
+    background: #FAFAFA;
+    box-shadow: 0 2px 4px #4385bb12;
+    border-radius: 10px;
+	transform: scaleY(1);/*Gナビメニューにホバーしたら表示*/
+}
+
+.dropdown__list {
+	display: flex;
+    align-items: center;
+    background: #FAFAFA;
+    height: 60px;
+    gap: 1rem;
+    transition: all .3s;
+    position: relative;
+	border-radius: 10px;
+	padding-left: 10px;
+}
+
+.dropdown__list:hover {
+    background-color: #e4e4e4;
+}
+
+.nav-profile-circle {
+	position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.nav-profile-circle img {
+	position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    border-radius: 50%;
+}
+
+
 main {
 	position: relative;
-	top: 5rem;
+	top: 3rem;
 }
 
 main .container {
@@ -314,7 +408,7 @@ main .container .left .sidebar .menu-item:last-child {
 
 .left .notification-popup > div {
 	display: flex;
-	align-items: start;
+	
 	gap: 1rem;
 	margin-bottom: 1rem;
 }
@@ -433,6 +527,10 @@ main .container .right {
 }
 
 @media screen and (max-width: 750px){
+	body {
+	    background:#f3fafc; 
+	}
+
 	main {
 		margin-bottom: 10rem;
 	}
@@ -457,6 +555,7 @@ main .container .right {
 		top: initial;
 		transform: translate(-50%, 0);
 		z-index: 10;
+		display: none;
 	}
 
 	main .container .left .sidebar {

@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from "react";
+import { ReactComponent as CircleIcon } from "../Icons/CircleIcon.svg";
 import { db } from "../../firebase";
 import { Link } from "react-router-dom";
 
 
-const Followed = React.memo(({ name, followed }) => {
+const Followed = ({ name, followed }) => {
 	return (
 		<div className="follow-container">
 			<div><strong>{name}</strong>さんのフォロワー</div>
-			{followed &&
-			 followed.map((id, i) => (
-				 <User  key={i} userId={id.following}  />
-			 ))
+			{followed.length === 0  ? (
+				<div>フォロワーがいません</div>
+			) : (
+				followed.map((id, i) => (
+					<User  key={i} userId={id.following}  />
+				))
+			)
+
 			}
         </div>
   );
-});
+};
 
-const User = React.memo(({ userId }) => {
+const User = ({ userId }) => {
   const [user, setUser] = useState({});
   useEffect(() => {
 	db.collection("users")
@@ -27,7 +32,6 @@ const User = React.memo(({ userId }) => {
 	  });
   }, []);
 
-
   return (	
 	<Link
 	to={{
@@ -35,9 +39,10 @@ const User = React.memo(({ userId }) => {
 		state: { fromDashboard: true },
 	}}>
 	     <div className="user-list">
-		    <div className="profile-photo linear-border">
-		        <img src={user.photoURL} alt="image" />
-			</div>
+		    <div className="bubble-profile-circle">
+                <img src={user.photoURL} alt="profile" />
+                <CircleIcon />
+            </div>
 		    <div className="profile-text-container">
 			  <div>{user.displayName}</div>
 			  <div className="profile-text">{user.profile}</div> 
@@ -45,6 +50,6 @@ const User = React.memo(({ userId }) => {
 	     </div>
 　　</Link>
   )
-});
+};
 
 export default Followed;

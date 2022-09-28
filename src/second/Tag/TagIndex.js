@@ -4,6 +4,7 @@ import { AuthContext } from "../../components/Auth/Auth";
 import { ReactComponent as HashIcon } from "../Icons/HashIcon.svg";
 import './Tag.css';
 import { Link } from 'react-router-dom';
+import LeftArrow from '../Parts/LeftArrow';
 
 const TagIndex = () => {
 	const { currentUser } = useContext(AuthContext);
@@ -34,25 +35,12 @@ const TagIndex = () => {
 
 	const [elment, setElment] = useState(null);
 
-	const firstLoad = () => {
-		db.collection('tags')
-		  .orderBy('created', 'desc')
-		  .limit(10)
-		  .get()
-		  .then((res) => {
-			 const items = [];
-			 const lastDoc = res.docs[res.docs.length - 1]
-			 res.forEach((doc) => {
-			   items.push(doc.data())
-			 })
-			 setTagIndex(items)
-			 setLastDoc(lastDoc)
-		})
-	}
-
 	React.useEffect(() => {
+		if (reorder === null) {
+			setReorder({ order: "created", by: "desc" });
+		  }
 		db.collection('tags')
-		  .orderBy('created', 'desc')
+		  .orderBy(reorder.order, reorder.by)
 		  .limit(10)
 		  .get()
 		  .then((res) => {
@@ -84,7 +72,7 @@ const TagIndex = () => {
 	const load = () => {
 		if(lastDoc !== "") {
 			db.collection('tags')
-			.orderBy('created', 'desc')
+			.orderBy(reorder.order, reorder.by)
 			.startAfter(lastDoc)
 			.limit(20)
 			.get()
@@ -112,34 +100,51 @@ const TagIndex = () => {
 	}, [load])
 	
 	return (
-		<div className="tagindex-container">
-			<div className="tagindex-title">
-				<HashIcon />
-				<h3>話題</h3>
-			</div>
+		<>
+		<LeftArrow />
+		<div className='tagindex-c'>
+			   <h4>tags</h4>
+			   <div className="taglist-order-nav">
+                  <div
+                    onClick={() => {
+                      setReorder({ order: "created", by: "desc" });
+                    }}
+                  >
+                    新しい順
+                  </div>
+                  <div
+                    onClick={() => {
+                      setReorder({ order: "threadCount", by: "desc" });
+                    }}
+                  >
+                    投稿が多い順
+                  </div>
+                  <div
+                    onClick={() => {
+                      setReorder({ order: "userCount", by: "desc" });
+                    }}
+                  >
+                    フォロワー順
+                  </div>
+                </div>
+			   	
 			{tagIndex &&
 			 tagIndex.map((tag, i) => (
-			  <Link
-			  key={i} 
-			  to={{
-					pathname: `/tags/${tag.name}`,
-					state: { fromDashboard: true }
-			  }}>
-				<div className="text-smaller name">{tag.name}</div>
-				<div className="right-side">
-					<div>
-						<div className="text-muted text-smaller">投稿</div>
-						<div>{tag.threadId.length}
-						<span className="text-muted text-smaller">件</span>
-						</div>
-					</div>
-					<div>
-						<div className="text-muted text-smaller">フォロワー</div>
-						<div>{tag.userId.length}
-						<span className="text-muted text-smaller">人</span>
-						</div>
-					</div>
-					<div className="text-smaller">フォローする</div>
+				 <Link
+				 className='tagindex-row'
+				 key={i} 
+				 to={{
+					 pathname: `/tags/${tag.name}`,
+					 state: { fromDashboard: true }
+					}}>
+				<div className='tag'>{tag.name}</div>
+				<div className='tagindex-row-right'>
+					<span><i className='uil uil-comment'></i></span>
+					<div className='tagindex-title'>投稿</div>
+					<div className='tagindex-numbar'>{tag.threadId.length}</div>
+					<span><i className='uil uil-user'></i></span>
+					<div className='tagindex-title'>フォロワー</div>
+					<div className='tagindex-numbar'>{tag.userId.length}</div>					
 				</div>
 			  </Link>
 			 ))
@@ -147,6 +152,7 @@ const TagIndex = () => {
 			{isEmpty && <p className="text-smaller">これ以上ありません</p>}
 			<button ref={setElment}></button>
 		</div>
+		</>
 	)
 }
 

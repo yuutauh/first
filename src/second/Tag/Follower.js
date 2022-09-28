@@ -39,7 +39,7 @@ const User = React.memo(({ userId }) => {
 			  </div>
 			  <div className="profile-text-container">
 				  <p>{user.displayName}</p>
-				  <div　className="profile-text">--{user.profile}</div> 
+				  <div className="profile-text">--{user.profile}</div> 
 			  </div>
 		  </div>
 		  </Link>

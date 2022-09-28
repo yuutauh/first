@@ -1,0 +1,228 @@
+.bubble-show-c {
+	width: 90%;
+    margin: 0 auto;
+}
+
+.bubble-show-content {
+	display: flex;
+	justify-content: center;
+    grid-gap: 1rem;
+    gap: 1rem;
+}
+
+.bubble-show-poster {
+	margin-bottom: 1em;
+}
+
+.bubble-show-poster-h {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin: 0.5rem 0;
+}
+
+.bubble-show-poster-h h6  {
+	color: blue;
+}
+
+.bubble-show-poster img {
+	width: 30px;
+	height: 30px;
+	border-radius: 50% ;
+}
+
+.bubble-show-msg {
+	color: #222;
+    margin: 20px;
+    position: relative;
+    padding: 40px 30px;
+    word-break: break-all;
+    box-shadow: 0 2px 4px #4385bb12;
+    font-size: 14px;
+    line-height: 30px;
+    letter-spacing: 0.1em;
+    background: #fafafad9;
+    white-space: pre-wrap;
+    border-radius: 0px 15px 15px 15px;
+}
+
+.bubble-show-created {
+	text-align: end;
+	font-family: "メイリオ","Hiragino kaku Gothic Pro",sans-serif;
+	font-size: 0.8rem;
+}
+
+.bubble-show-taglist {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0.5rem 0;
+} 
+
+.bubble-show-taglist .tag {
+	margin-right: 10px;
+}
+
+.bubble-show-action-buttons {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.bubble-show-action-buttons span {
+	font-size: 1.5rem;
+}
+
+.bubble-show-action-buttons svg {
+	width: 1.8rem;
+	height: 2.3rem;
+}
+
+.bubble-show-action-button {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.bubble-show-action-button  p {
+	color: #222;
+	font-size: 0.7rem;
+}
+
+.bubble-show-number {
+	font-weight: 700;
+	letter-spacing: 0.07rem;
+}
+
+.bubble-show-msg {
+	word-break: break-all;
+}
+
+.bubble-show-comment-textarea-wraper {
+	margin-bottom:1rem;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.bubble-show-comment-textarea-wraper textarea {
+	font-family: 'Poppins';
+	background: #FAFAFA;
+	box-shadow: 0 2px 4px #4385bb12;
+	width: 100%;
+	height: 59px;
+	margin: 0 auto;
+	padding: 15px;
+	border-radius: 5px;
+	outline: none;
+	resize: none;
+}
+
+.bubble-show-comment-content {
+	display: flex;
+    grid-gap: 1rem;
+    grid-gap: 1rem;
+    gap: 1rem;
+}
+
+.bubble-msg-comment {
+	white-space: pre-wrap;
+    background: #FAFAFA;
+    color: #222;
+    position: relative;
+    padding: 30px;
+    word-break: break-all;
+    box-shadow: 0 2px 4px #4385bb12;
+    font-size: 14px;
+    line-height: 30px;
+    letter-spacing: 0.1em;
+    font-family: "メイリオ","Hiragino kaku Gothic Pro",sans-serif;
+    border-radius: 0px 15px 15px 15px;
+    min-width: 250px;
+    min-height: 100px;
+}
+
+.bubble-show-comment-button {
+	background-color: #fff;
+    border: 1px solid #5c93bb2b;
+    box-shadow: 0 2px 3px -2px #21253840;
+    padding: 10px 10px;
+    margin: 5px;
+    border-radius: 4px;
+}
+
+.bubble-comment-action-buttons {
+	display: flex;
+	position: absolute;
+	flex-wrap: wrap;
+	bottom: 10px;
+}
+
+.bubble-comment-action-buttons i,
+.bubble-comment-action-buttons svg {
+	font-size: 1.4rem;
+    width: 1.2rem;
+    margin-right: 0.4rem;
+}
+
+.bubble-comment-action-buttons .bubble-action-button {
+	margin-right: 0.3rem;
+	height: 20px;
+}
+
+.bubble-comment-action-buttons .bubble-action-button .bubble-numbar {
+	font-weight: bold;
+}
+  
+.bubble-profile-circle{
+	position:relative;
+	width:40px;
+	height:40px;
+	margin: 0 auto;
+}
+
+.bubble-profile-circle > svg{
+  fill:none;
+  stroke:#8a3ab9;
+  stroke-width:3;
+  animation: stroke-draw 6s ease-out infinite alternate; 
+}
+
+.bubble-profile-circle > img{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%, -50%);
+  width:30px;
+  border-radius:50%;
+}
+
+  @keyframes stroke-draw {
+	from{
+	  stroke:#8a3ab9;
+	 
+	}
+	to{
+	  stroke:#cd486b;
+	  transform:rotate(180deg);
+	 
+	}
+}
+
+.mosaic {
+	filter: blur(3px);
+}
+
+.on {
+	fill: rgb(249, 24, 128);;
+}
+
+.popon {
+	fill: rgb(255, 165, 46);
+}
+
+.error {
+	color: red;
+}

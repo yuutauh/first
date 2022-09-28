@@ -43,7 +43,7 @@ const Feed = ({
 					state: { fromDashboard: true },
 				}}>
 					<p className="msg">
-					{body}
+					  {`kokokok\ndfdfef`}
 					</p>
 				</Link>
 			</div>

@@ -12,25 +12,30 @@ import TrendIndex from '../Trend/TrendIndex';
 import TagIndex from '../Tag/TagIndex';
 import Trends from '../Trend/Trends';
 import {Input, InputRouter} from '../Input/Input';
-
+import ShowBubble from '../Feed/ShowBubble';
+import Login from '../Login/Login';
+import LoginMsg from '../Login/LoginMsg';
+import Search from '../Search/Search';
+import Tos from '../Info/Tos';
+import Privacy from '../Info/Privacy';
 
 
 const Home = () => {
   
 	return (
 		<>
+		<BrowserRouter>
 		<Nav />
 		<main>
-			<BrowserRouter>
 			<div className="container">
 				<div className="left">
-				    <Left />
+				    {/* <Left /> */}
 				</div>
 				<div className="middle">
 					    <ScrollToTop />
 						<Switch>
 							<Route path="/body/:body">
-								<ShowFeed />
+								<ShowBubble />
 							</Route>
 							<Route path="/tags/:tag">
 								<Tags />
@@ -38,14 +43,26 @@ const Home = () => {
 							<Route path="/trends/:tag">
 								<Trends />
 							</Route>
-							<Route path="/profile">
+							<Route exact path="/profile/:profile">
 								<Profile />
 							</Route>
-							{/* <Route path="/trendindex">
-								 <TrendIndex /> 
-							</Route> */}
+							<Route path="/search">
+								 <Search /> 
+							</Route>
 							<Route path="/tagindex">
 								<TagIndex />
+							</Route>
+							<Route exact path="/login">
+                                 <Login />
+							</Route>
+							<Route exact path="/login/:login">
+								<LoginMsg />
+							</Route>
+							<Route exact path="/tos">
+								<Tos />
+							</Route>
+							<Route exact path="/privacy">
+								<Privacy />
 							</Route>
 							<InputRouter path="/input" component={Input} />
 							<Route path="/">
@@ -57,8 +74,8 @@ const Home = () => {
 				    {/* <RightTrends /> */}
 				</div>
 			</div>
-			</BrowserRouter>
 		</main>
+		</BrowserRouter>
 		</>
 	)
 }

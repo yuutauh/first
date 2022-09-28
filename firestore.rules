@@ -6,7 +6,8 @@ service cloud.firestore {
       allow read;
       allow create: if isSignedIn() &&
                     isThreadValidate(request.resource.data)
-                    && request.resource.data.id == threadId;
+                    && request.resource.data.id == threadId
+                    && request.resource.data.body != "";
                     
       allow update: if isSignedIn() &&
                     isThreadValidate(request.resource.data)
@@ -27,7 +28,7 @@ service cloud.firestore {
       allow read;
       allow create: if isSignedIn() &&
                     isTagValidate(request.resource.data)&&
-                    request.resource.data.id == tagsId ;
+                    request.resource.data.id == tagsId;
       allow update: if isSignedIn() &&
                     isTagValidate(request.resource.data)
     }
@@ -98,6 +99,7 @@ service cloud.firestore {
         && comment.badCount is int
         && 'comment' in comment
         && comment.comment is string
+        && comment.comment != ""
         && 'created' in comment 
         && comment.created is timestamp
         && 'favorites' in comment
@@ -115,7 +117,7 @@ service cloud.firestore {
     }
     
     function isTagValidate(tag){
-      return tag.size() == 5
+      return tag.size() == 7
       && 'created' in tag
       && tag.created is timestamp
       && 'id' in tag
@@ -126,6 +128,10 @@ service cloud.firestore {
       && tag.threadId is list
       && 'userId' in tag
       && tag.userId is list
+      && 'threadCount' in tag
+      && tag.threadCount is int
+      && 'userCount' in tag
+      && tag.userCount is int
     }
     
     function isFavoritesValidate(favorite){

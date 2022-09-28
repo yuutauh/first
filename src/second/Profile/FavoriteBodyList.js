@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../../firebase";
-import UserBodyList from "./UserBodyList";
-import ProfileBubble from "../../second/Profile/ProfileBubble";
+import ProfileBubble from "./ProfileBubble";
 
 const FavoriteBodyList = React.memo(({ name, id }) => {
   const [threads, setThreads] = useState([]);
@@ -100,22 +99,7 @@ const FavoriteBodyList = React.memo(({ name, id }) => {
   }, [load]);
 
   return (
-    <div className="favoritebody-c">
-      <button
-        onClick={() => {
-          setFavoriteIndex({ order: "created", by: "desc" });
-        }}
-      >
-        desc
-      </button>
-      <button
-        onClick={() => {
-          setFavoriteIndex({ order: "created", by: "asc" });
-        }}
-      >
-        asc
-      </button>
-
+    <div className="favoritebody-c">      
       <ProfileBubble
         name={name}
         threads={threads}

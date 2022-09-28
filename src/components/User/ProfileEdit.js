@@ -49,16 +49,13 @@ const ProfileEdit = ({ history }) => {
 
 	const validate = () => {
 		let bodyerror = "";
-
 		if(body.length > 200) {
 			bodyerror = "２００字より多く入力できません"
 		}
-
 		if(bodyerror) {
 			setError(bodyerror)
 			return false
 		}
-
 		setError("")
 		return true
 	}

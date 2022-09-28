@@ -10,7 +10,9 @@ const InputTag = React.memo(({
 	onTags, 
 	setOnTags, 
 	tagError,
-	setTagError 
+	setTagError,
+	onTagDatas,
+	setOnTagDatas
 }) => {
 
 	return (
@@ -22,7 +24,9 @@ const InputTag = React.memo(({
 			tags={tags}
 			inputTags={inputTags}
 			tagError={tagError}
-			setTagError={setTagError} 
+			setTagError={setTagError}
+			onTagDatas={onTagDatas}
+			setOnTagDatas={setOnTagDatas} 
 			/>
 		</div>
 	)

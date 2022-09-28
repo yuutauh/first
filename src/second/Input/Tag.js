@@ -1,16 +1,23 @@
 import React from 'react';
-import styled from 'styled-components';
   
 
-const Tag = React.memo(({ tag, onTags, setOnTags, add, clear, untags }) => {
+const Tag = React.memo(({ 
+	tag, 
+	onTags, 
+	setOnTags, 
+	onTagDatas,
+	setOnTagDatas
+}) => {
 		const toggleTag = (tag) => {
 			tag.toggle = false
 			setOnTags(prev => [...prev, tag.data.name])
+			setOnTagDatas(prev => [...prev, tag.data])
 		}
 	
 		const offtoggleTag = (tag) => {
 			tag.toggle = true
 			setOnTags(onTags.filter(onTag => onTag !== tag.data.name))
+			setOnTagDatas(onTagDatas.filter(onTagData => onTagData !== tag.data))
 		}
 		
 		return (

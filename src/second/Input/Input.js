@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import InputText from './InputText';
 import InputTag from './InputTag';
 import './Input.css'; 
+import LeftArrow from '../Parts/LeftArrow';
 
 
 export const Input = ({ history }) => {
@@ -14,6 +15,7 @@ export const Input = ({ history }) => {
 	const [textError, setTextError] = React.useState("");
 	const [tags, setTags] = useState([]);
 	const [onTags, setOnTags] = useState([]);
+	const [onTagDatas, setOnTagDatas] = useState([]);
 	const [tagError, setTagError] = useState("");
 	const inputText = useCallback((e) => { setText(e.target.value) }, [setText])
 	const inputTags = useCallback((tags) => { setTags(prev => [prev, tags]) }, [setTags])
@@ -74,15 +76,18 @@ export const Input = ({ history }) => {
 						id: tagId,
 						threadId: fb.firestore.FieldValue.arrayUnion(id),
 						created: fb.firestore.FieldValue.serverTimestamp(),
-						userId: []
+						userId: [],
+						threadCount: 1,
+						userCount: 0,
 					})
 				})
 			).then(
-				onTags.forEach((doc) => {
+				onTagDatas.forEach((doc) => {
 					db.collection("tags")
-					.doc(doc)
+					.doc(doc.id)
 					.update({
 						threadId: fb.firestore.FieldValue.arrayUnion(id),
+						threadCount: fb.firestore.FieldValue.increment(1)
 					})
 				})
 			)
@@ -92,7 +97,8 @@ export const Input = ({ history }) => {
 
 	return (
 		<div className="input-container">
-			<h3>「言葉」をとうこうする</h3>
+			<LeftArrow />
+			<h4>投稿</h4>
 			<InputTag 
 			tags={tags}
 			setTags={setTags}
@@ -101,8 +107,11 @@ export const Input = ({ history }) => {
 			inputTags={inputTags}
 			tagError={tagError}
 			setTagError={setTagError}
+			onTagDatas={onTagDatas}
+			setOnTagDatas={setOnTagDatas}
 			/>
 			<InputText
+			currentUser={currentUser}
 			text={text}
 			tags={tags}
 			onTags={onTags}
@@ -111,15 +120,17 @@ export const Input = ({ history }) => {
 			setTextError={setTextError}
 			/>
 			{textError && <p className="error">{textError}</p> }
-			<button onClick={() => {
+			<button
+			className='input-button' 
+			onClick={() => {
 				const Validate = validate()
 				if(Validate) {
 					addThread()
 				} else {
 					return false
 				}
-			}} >
-				「言葉」をとうこうする
+			}}>
+				投稿
 			</button>
 		</div>
 	)

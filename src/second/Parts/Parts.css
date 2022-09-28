@@ -1,7 +1,7 @@
 .profile-photo{
-	width: 2.7rem;
+	width: 2rem;
 	aspect-ratio: 1/1;
-	border-radius: 40%;
+	border-radius: 50%;
 	overflow: hidden;
 	cursor: pointer;
 }
