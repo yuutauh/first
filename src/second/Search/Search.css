@@ -13,41 +13,49 @@
 	display: flex;
 	justify-content: center;
     width: 80%;
-	margin: 1rem auto;
+	margin: 1rem auto 2rem;
+}
+
+.search-input-boxshadow {
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 5px #b8b9be,inset -3px -3px 7px #fff!important;
+    width: 100%;
+    padding: 10px 30px;
+    margin-right: 1rem;
 }
 
 .search-w input {
-	width: 100%;
-	padding: 10px 30px;
-    border-radius: 10px;
-	font-family: 'Poppins';
-	box-shadow: 0 2px 4px #4385bb12;
+    width: 100%;
+    font-family: 'Poppins';
+    background: #e0e0e0;
 }
 
 .search-input-c button {
-	border-radius: 10px;
-    width: 40px;
-	box-shadow: 0 2px 4px #4385bb12;
+	width: 50px;
+    border-radius: 50px;
+    background: #e0e0e0;
+    box-shadow: 7px 7px 14px #c3c3c3, -7px -7px 14px #fdfdfd;
 }
 
 .search-nav {
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 70%;
-	margin: 0 auto 2rem;
-	background: #fff;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    margin: 0 auto 2rem;
     border-radius: 10px;
-    box-shadow: 0 2px 4px #4385bb12;
-	text-align: center;
+    text-align: center;
 }
 
 .search-nav div {
 	padding: 10px;
-	flex: 1;
-	font-family: Poppins;
-	border-left: 1px solid #d6e3ed;
-	font-size: 0.8rem;
+    border-radius: 10px;
+    margin-right: 0.5rem;
+    flex: 1 1;
+    font-family: Poppins;
+    font-size: 0.8rem;
+    background: #e0e0e0;
+    box-shadow: 7px 7px 14px #c3c3c3, -7px -7px 14px #fdfdfd;
 }
 
 .search-nav div:first-child {
@@ -88,4 +96,22 @@
     gap: 1rem;
     padding: 10px;
 	border-bottom: 1px solid #5c93bb2b;
+}
+
+.active-search-nav {
+	font-weight: bold;
+}
+
+@media screen and (max-width: 750px){
+    .search-input-c {
+        width: 95%;
+    }
+
+    .search-nav{
+        width: 90%;
+    }
+
+    .search-nav div {
+        font-size: .5rem;
+    }
 }

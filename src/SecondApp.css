@@ -48,11 +48,11 @@ a {
 body {
 	font-family: 'Poppins';
 	color: var(--dribbble-black);
-	background-color: var(--color-white);
+	background: #e0e0e0;
 	overflow-x: hidden;
 }
 
-body:before{
+/* body:before{
 	content:"";
 	display:block;
 	position:fixed;
@@ -63,7 +63,7 @@ body:before{
 	height:100vh;
 	background:url(https://source.unsplash.com/75xPHEQBmvA) center no-repeat;
 	background-size:cover;
-  }
+  } */
 
 .btn{
 	display: inline-block;
@@ -105,9 +105,7 @@ body:before{
 nav {
 	position: fixed;
 	width: 100%;
-	padding: 0.5rem 0;
 	z-index: 11;
-	/* background-color: rgba(255, 255, 255, 0.85); */
 	background-color: transparent;
 	transition: all 900ms ease ;
 }
@@ -135,8 +133,8 @@ nav {
 }
 
 .title svg {
-	width: 2rem;
-	height: 2rem;
+	width: 3rem;
+	height: 3rem;
 	margin-right: 1rem;
 }
 
@@ -527,10 +525,6 @@ main .container .right {
 }
 
 @media screen and (max-width: 750px){
-	body {
-	    background:#f3fafc; 
-	}
-
 	main {
 		margin-bottom: 10rem;
 	}

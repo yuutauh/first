@@ -1,11 +1,13 @@
 .tagindex-c {
-	background-color: #fff;
-	border-radius: 12px;
-    box-shadow: 0 2px 4px #4385bb12;
+	padding: 1rem;
+    border-radius: 12px;
 }
 
-.tagindex-c > h4 {
-	padding: 1rem;
+.tagindex-h  {
+	display: flex;
+    padding: 1rem;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .tagindex-row{
@@ -28,12 +30,13 @@
 
 .tag {
 	width: fit-content;
-	border-radius: 4px;
+    border-radius: 4px;
     padding: 4px 12px;
     transition: all .15s ease;
-	font-size: 13px;
+    font-size: 13px;
     line-height: 24px;
-	box-shadow: 0 0 0 1px #0000001a inset;
+	background: #e0e0e0;
+    box-shadow: 7px 7px 14px #bababa, -7px -7px 14px #ffffff;
 }
 
 .tagindex-c .uil {
@@ -53,11 +56,11 @@
 }
 
 .taglist-h {
-	padding: 1rem 2rem;
-    width: 90%;
-    margin: 0 auto 1rem;
-    background-color: #fff;
+	width: 90%;
+    margin: 0 auto;
+    padding: 2rem;
     border-radius: 12px;
+    background: #e0e0e0;
 }
 
 .taglist-i {
@@ -104,4 +107,31 @@
 .tags-follower {
 	width: 90%;
     margin: 0 auto;
+}
+
+.taglist-order-nav {
+	display: flex;
+    align-items: center;
+    font-size: .75rem;
+    color: dimgray;
+}
+
+.taglist-order-nav div {
+	border-right: 1px solid dimgray;
+	padding: .5rem 1rem;
+}
+
+.taglist-order-nav div:last-child {
+	border-right: none;
+}
+
+.active-taglist-order-nav {
+	color: black;
+	font-weight: bold;
+}
+
+@media screen and (max-width: 750px){
+	.taglist-order-nav {
+		font-size: .3rem;
+	}
 }

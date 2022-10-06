@@ -4,7 +4,7 @@ import { ReactComponent as CircleIcon } from "../Icons/CircleIcon.svg";
 import { ReactComponent as BadIcon } from "../Icons/BadIcon.svg";
 import { ReactComponent as LoveIcon } from "../Icons/LoveIcon.svg";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Comment = ({
@@ -17,8 +17,8 @@ const Comment = ({
 
   useEffect(() => {
     if(currentUser !== null) {
-      const iF = comment.favorites.some((item) => item == currentUser.uid);
-      const iB = comment.bads.some((item) => item == currentUser.uid);
+      const iF = comment.favorites.some((item) => item === currentUser.uid);
+      const iB = comment.bads.some((item) => item === currentUser.uid);
 
       setIsFavorite(iF)
       setIsBad(iB)
@@ -117,6 +117,8 @@ const Comment = ({
   }
 
   return (
+    <>
+    {comment && (
     <div className="comment">
       <div className="bubble-show-comment-content">
         <div className="bubble-show-user-c">
@@ -132,7 +134,11 @@ const Comment = ({
                 {comment.comment}
               <div className="bubble-comment-action-buttons">
                 <div className="bubble-action-button text-muted">
-                  {formatDistanceToNow(comment.created.toDate()) + "ago"}
+                  {comment.created && (
+                    <>
+                      {formatDistanceToNow(comment.created.toDate()) + "ago"}
+                    </>
+                  )}
                 </div>
                 <div className="bubble-action-button">
                 <LoveIcon 
@@ -170,6 +176,8 @@ const Comment = ({
         </div>
       </div>
     </div>
+    )}
+    </>
   );
 };
 

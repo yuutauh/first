@@ -7,6 +7,8 @@ import "../Feed/Feed.css";
 import "./Tag.css";
 import Follower from "./Follower";
 import LeftArrow from "../Parts/LeftArrow";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Tags = () => {
   const [tag, setTag] = useState("");
@@ -32,7 +34,7 @@ const Tags = () => {
     return [loc, setLoc];
   };
 
-  const [reorder, setReorder] = useLocalStorage("tagList");
+  const [reorder, setReorder] = useLocalStorage("tags");
 
   const observer = React.useRef(
     new IntersectionObserver(
@@ -50,7 +52,42 @@ const Tags = () => {
   useEffect(() => {
     if (reorder === null) {
       setReorder({ order: "created", by: "desc" });
-    }
+      db.collection("threads")
+        .where("tagname", "array-contains", decoded)
+        .orderBy("created", "desc")
+        .limit(8)
+        .get()
+        .then((docs) => {
+          const size = docs.size === 0;
+          if (!size) {
+            const items = [];
+            const lastDoc = docs.docs[docs.docs.length - 1];
+            docs.forEach((doc) => {
+              items.push(doc.exists ? doc.data() : { body: "no data" });
+            });
+            setThreads(items);
+            setLastDoc(lastDoc);
+          }
+        })
+    } else {
+      db.collection("threads")
+        .where("tagname", "array-contains", decoded)
+        .orderBy(reorder.order, reorder.by)
+        .limit(8)
+        .get()
+        .then((docs) => {
+          const size = docs.size === 0;
+          if (!size) {
+            const items = [];
+            const lastDoc = docs.docs[docs.docs.length - 1];
+            docs.forEach((doc) => {
+              items.push(doc.exists ? doc.data() : { body: "no data" });
+            });
+            setThreads(items);
+            setLastDoc(lastDoc);
+          }
+        })
+    } 
 
     db.collection("tags")
       .where("name", "==", decoded)
@@ -64,23 +101,6 @@ const Tags = () => {
         setTag(i[0]);
       });
 
-    db.collection("threads")
-      .where("tagname", "array-contains", decoded)
-      .orderBy(reorder.order, reorder.by)
-      .limit(8)
-      .get()
-      .then((docs) => {
-        const size = docs.size === 0;
-        if (!size) {
-          const items = [];
-          const lastDoc = docs.docs[docs.docs.length - 1];
-          docs.forEach((doc) => {
-            items.push(doc.exists ? doc.data() : { body: "no data" });
-          });
-          setThreads(items);
-          setLastDoc(lastDoc);
-        }
-      });
   }, [reorder, pathname]);
 
   const Fetchmore = () => {
@@ -141,8 +161,7 @@ const Tags = () => {
 
   const onFavorites = () => {
     if (currentUser == null) {
-      console.log("asdc");
-      return false;
+      toast("ログインしてください")
     } else {
       const count = tag.userCount + 1;
       const o = {
@@ -160,8 +179,7 @@ const Tags = () => {
 
   const offFavorites = () => {
     if (currentUser == null) {
-      console.log("asdc");
-      return false;
+      toast("ログインしてください")
     } else {
       const o = tag.userId.filter((favorite) => favorite !== currentUser.uid);
       const count = tag.userCount - 1;
@@ -185,6 +203,7 @@ const Tags = () => {
         {tag ? (
           <>
             <LeftArrow />
+            <ToastContainer />
             <div className="taglist-h">
               <h4>topic</h4>
               <div className="taglist-i">
@@ -238,6 +257,10 @@ const Tags = () => {
               <div>
                 <div className="search-nav">
                   <div
+                    className={
+                      reorder?.order == "created" && 
+                      reorder?.by == "desc" 
+                    ? "active-taglist-order-nav" : ""}
                     onClick={() => {
                       setReorder({ order: "created", by: "desc" });
                     }}
@@ -245,6 +268,10 @@ const Tags = () => {
                     新しい順
                   </div>
                   <div
+                    className={
+                      reorder?.order == "created" && 
+                      reorder?.by == "asc" 
+                    ? "active-taglist-order-nav" : ""}
                     onClick={() => {
                       setReorder({ order: "created", by: "asc" });
                     }}
@@ -252,6 +279,9 @@ const Tags = () => {
                     古い順
                   </div>
                   <div
+                    className={
+                      reorder?.order == "favoriteCount" 
+                    ? "active-taglist-order-nav" : ""}
                     onClick={() => {
                       setReorder({ order: "favoriteCount", by: "desc" });
                     }}

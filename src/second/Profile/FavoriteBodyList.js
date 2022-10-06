@@ -2,23 +2,18 @@ import React, { useState, useEffect } from "react";
 import { db } from "../../firebase";
 import ProfileBubble from "./ProfileBubble";
 
-const FavoriteBodyList = React.memo(({ name, id }) => {
+const FavoriteBodyList = React.memo(({ 
+  name, 
+  id,
+  reorder,
+  setReorder,
+  favoriteIndex,
+  setFavoriteIndex 
+}) => {
   const [threads, setThreads] = useState([]);
   const [lastDoc, setLastDoc] = useState("");
   const [isEmpty, setIsEmpty] = useState(false);
-  const [reorder, setReorder] = useState({});
-  const useLocalStorage = (localItem) => {
-    const [loc, setState] = useState(
-      JSON.parse(localStorage.getItem(localItem))
-    );
-    const setLoc = (newItem) => {
-      localStorage.setItem(localItem, JSON.stringify(newItem));
-      setState(newItem);
-    };
-    return [loc, setLoc];
-  };
-
-  const [favoriteIndex, setFavoriteIndex] = useLocalStorage("favoriteprofile");
+ 
   const [element, setElement] = useState(null);
   const observer = React.useRef(
     new IntersectionObserver((entries) => {
@@ -104,7 +99,9 @@ const FavoriteBodyList = React.memo(({ name, id }) => {
         name={name}
         threads={threads}
         isEmpty={isEmpty}
+        favoriteIndex={favoriteIndex}
         setElement={setElement}
+        reorder={reorder}
         setReorder={setReorder}
         setFavoriteIndex={setFavoriteIndex}
       />

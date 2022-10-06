@@ -10,6 +10,20 @@ require('dotenv').config();
 
 admin.initializeApp();
 
+// exports.setAdminClaim = functions
+//     .firestore
+// 	.document('/users/{userId}')
+// 	.onCreate(async (snap, context) => {
+// 		try {
+//             admin.auth().setCustomUserClaims(context.params.userId,  { createdByAdmin: true })
+// 		} catch(error) {
+// 			console.log(error)
+// 		}
+// })
+
+
+					 
+
 // exports.makeUppercase = functions.firestore.document('/messages/{documentId}')
 //     .onCreate((snap, context) => {
 

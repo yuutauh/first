@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../../firebase";
-import UserBodyList from "./UserBodyList";
 import ProfileBubble from "../../second/Profile/ProfileBubble";
 
 const FavoriteBodyList = React.memo(({ name, id }) => {

@@ -11,17 +11,6 @@ const Feeds = () => {
   const [lastDoc, setLastDoc] = useState("");
   const [isEmpty, setIsEmpty] = useState(false);
   const { currentUser } = useContext(AuthContext);
-  const useLocalStorage = (localItem) => {
-    const [loc, setState] = useState(
-      JSON.parse(localStorage.getItem(localItem))
-    );
-    const setLoc = (newItem) => {
-      localStorage.setItem(localItem, JSON.stringify(newItem));
-      setState(newItem);
-    };
-    return [loc, setLoc];
-  };
-  const [reorder, setReorder] = useLocalStorage("fruit");
 
   const observer = React.useRef(
     new IntersectionObserver(
@@ -36,11 +25,8 @@ const Feeds = () => {
   );
 
   useEffect(() => {
-    if (reorder === null) {
-      setReorder({ order: "created", by: "desc" });
-    }
     db.collection("threads")
-      .orderBy(reorder.order, reorder.by)
+      .orderBy("created", "desc")
       .limit(10)
       .get()
       .then((res) => {
@@ -52,7 +38,9 @@ const Feeds = () => {
         setThreads(items);
         setLastDoc(lastDoc);
       });
-  }, [reorder]);
+
+    return () => { console.clear() }
+  }, []);
 
   const [elment, setElment] = useState(null);
 
@@ -70,17 +58,14 @@ const Feeds = () => {
         currentObserver.unobserve(currentElement);
       }
     };
-  }, [elment, reorder]);
+  }, [elment]);
 
   const Fetchmore = () => {
-    if (reorder === null) {
-      setReorder({ order: "created", by: "desc" });
-    }
     if (lastDoc !== "")
       db.collection("threads")
-        .orderBy(reorder.order, reorder.by)
+        .orderBy("created", "desc")
         .startAfter(lastDoc)
-        .limit(3)
+        .limit(10)
         .get()
         .then((res) => {
           const size = res.size === 0;
@@ -103,6 +88,7 @@ const Feeds = () => {
   React.useEffect(() => {
     fetcher.current = Fetchmore;
   }, [Fetchmore]);
+
 
   return (
     <div className="feeds-c">

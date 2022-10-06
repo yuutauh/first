@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { db } from "../../firebase";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "./Search.css";
 
 const SearchTags = ({ index, setIndex }) => {
@@ -41,20 +41,23 @@ const SearchTags = ({ index, setIndex }) => {
   return (
     <>
       <div className="search-input-c">
-        <input
-		  placeholder="tags を検索"
-          type="text"
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
-        />
+        <div className="search-input-boxshadow">
+          <input
+            placeholder="tags を検索"
+            type="text"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+        </div>
         <button onClick={() => SearchTag(search)}>
           <i className="uil uil-search"></i>
         </button>
       </div>
       <div className="search-nav">
         <div
+          className={index === 1 ? "active-search-nav" : ""}
           onClick={() => {
             setIndex(1);
           }}
@@ -62,6 +65,7 @@ const SearchTags = ({ index, setIndex }) => {
           speech bubble
         </div>
         <div
+          className={index === 2 ? "active-search-nav" : ""}
           onClick={() => {
             setIndex(2);
           }}
@@ -69,6 +73,7 @@ const SearchTags = ({ index, setIndex }) => {
           tags
         </div>
         <div
+          className={index === 3 ? "active-search-nav" : ""}
           onClick={() => {
             setIndex(3);
           }}
@@ -77,31 +82,35 @@ const SearchTags = ({ index, setIndex }) => {
         </div>
       </div>
       <div className="search-tags-c">
-	  <div className='tagindex-c'>
-			{result &&
-			 result.map((tag, i) => (
-				 <Link
-				 className='tagindex-row'
-				 key={i} 
-				 to={{
-					 pathname: `/tags/${tag.name}`,
-					 state: { fromDashboard: true }
-					}}>
-				<div className='tag'>{tag.name}</div>
-				<div className='tagindex-row-right'>
-					<span><i className='uil uil-comment'></i></span>
-					<div className='tagindex-title'>投稿</div>
-					<div className='tagindex-numbar'>{tag.threadId.length}</div>
-					<span><i className='uil uil-user'></i></span>
-					<div className='tagindex-title'>フォロワー</div>
-					<div className='tagindex-numbar'>{tag.userId.length}</div>					
-				</div>
-			  </Link>
-			 ))
-	    }
-		</div>
-		<p className="text-smaller">{error}</p>
-	  </div>
+        <div className="tagindex-c">
+          {result &&
+            result.map((tag, i) => (
+              <Link
+                className="tagindex-row"
+                key={i}
+                to={{
+                  pathname: `/tags/${tag.name}`,
+                  state: { fromDashboard: true },
+                }}
+              >
+                <div className="tag">{tag.name}</div>
+                <div className="tagindex-row-right">
+                  <span>
+                    <i className="uil uil-comment"></i>
+                  </span>
+                  <div className="tagindex-title">投稿</div>
+                  <div className="tagindex-numbar">{tag.threadId.length}</div>
+                  <span>
+                    <i className="uil uil-user"></i>
+                  </span>
+                  <div className="tagindex-title">フォロワー</div>
+                  <div className="tagindex-numbar">{tag.userId.length}</div>
+                </div>
+              </Link>
+            ))}
+        </div>
+        <p className="text-smaller">{error}</p>
+      </div>
     </>
   );
 };

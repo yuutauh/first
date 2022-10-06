@@ -1,8 +1,6 @@
-import React, { useState, useRef } from "react";
-import { ReactComponent as DropdownIcon } from "../../Icons/DropdownIcon.svg";
+import React from "react";
 import { ReactComponent as BadIcon } from "../../Icons/BadIcon.svg";
-import { Link } from "react-router-dom";
-import Feed from "../../second/Feed/Feed";
+
 
 const UserBodyList = React.memo(
   ({ name, threads, isEmpty, setElement, setReorder, setFavoriteIndex }) => {

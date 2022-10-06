@@ -39,25 +39,26 @@ const SearchProfile = ({ index, setIndex }) => {
     }
   };
 
-  console.log(result)
-
   return (
     <>
       <div className="search-input-c">
-        <input
-		  placeholder="user を検索"
-          type="text"
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
-        />
+        <div className="search-input-boxshadow">
+          <input
+          placeholder="user を検索"
+            type="text"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+        </div>
         <button onClick={() => { SearchTag(search) }}>
           <i className="uil uil-search"></i>
         </button>
       </div>
       <div className="search-nav">
         <div
+          className={index === 1 ? "active-search-nav" : ""}
           onClick={() => {
             setIndex(1);
           }}
@@ -65,6 +66,7 @@ const SearchProfile = ({ index, setIndex }) => {
           speech bubble
         </div>
         <div
+          className={index === 2 ? "active-search-nav" : ""}
           onClick={() => {
             setIndex(2);
           }}
@@ -72,6 +74,7 @@ const SearchProfile = ({ index, setIndex }) => {
           tags
         </div>
         <div
+          className={index === 3 ? "active-search-nav" : ""}
           onClick={() => {
             setIndex(3);
           }}
@@ -83,19 +86,27 @@ const SearchProfile = ({ index, setIndex }) => {
 		<div className="search-profile">
 			{result &&
 			 result.map((r, i) => (
-				<div key={i} className="search-profile-item">
-					<div className="bubble-profile-circle">
-						<img src={r.photoURL} alt="profile" />
-						<CircleIcon />
-					</div>
-					<div className="profile-text-container">
-						<p>{r.displayName}</p>
-						<div className="profile-text">--{r.profile}</div> 
-					</div>
-				</div>
-			 ))
+        <Link
+        key={i} 
+        to={{
+          pathname: `/profile/${r.uid}`,
+          state: { fromDashboard: true }
+         }}>
+           <div key={i} className="search-profile-item">
+             <div className="bubble-profile-circle">
+               <img src={r.photoURL} alt="profile" />
+               <CircleIcon />
+             </div>
+             <div className="profile-text-container">
+               <p>{r.displayName}</p>
+               <div className="profile-text">--{r.profile}</div> 
+             </div>
+           </div>
+         </Link>
+         ))
 			}
 		</div>
+      <p className="text-smaller">{error}</p>
 	  </div>
     </>
   );

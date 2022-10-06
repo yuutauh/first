@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { db } from "../../firebase";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "./Search.css";
 import Bubble from "../Feed/Bubble";
 
@@ -39,25 +39,26 @@ const SearchSpeech = ({ index, setIndex }) => {
     }
   };
 
-  console.log(result)
-
   return (
     <>
       <div className="search-input-c">
-        <input
-		  placeholder="speech bubble を検索"
-          type="text"
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
-        />
+        <div className="search-input-boxshadow">
+          <input
+            placeholder="speech bubble を検索"
+            type="text"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+        </div>
         <button onClick={() => SearchTag(search)}>
           <i className="uil uil-search"></i>
         </button>
       </div>
       <div className="search-nav">
         <div
+          className={index === 1 ? "active-search-nav" : ""}
           onClick={() => {
             setIndex(1);
           }}
@@ -65,6 +66,7 @@ const SearchSpeech = ({ index, setIndex }) => {
           speech bubble
         </div>
         <div
+          className={index === 2 ? "active-search-nav" : ""}
           onClick={() => {
             setIndex(2);
           }}
@@ -72,6 +74,7 @@ const SearchSpeech = ({ index, setIndex }) => {
           tags
         </div>
         <div
+          className={index === 3 ? "active-search-nav" : ""}
           onClick={() => {
             setIndex(3);
           }}
@@ -80,21 +83,20 @@ const SearchSpeech = ({ index, setIndex }) => {
         </div>
       </div>
       <div className="search-speech-bubble-c">
-		{result &&
-		 result.map((r, i) => (
-			<Bubble 
-			key={i}
-            body={r.body}
-            userimage={r.userimage}
-            created={r.created}
-            id={r.id}
-            favoriteCount={r.favoriteCount}
-            badCount={r.badCount}
-			/>
-		 ))
-		}
-	    <p className="text-smaller">{error}</p>
-	  </div>
+        {result &&
+          result.map((r, i) => (
+            <Bubble
+              key={i}
+              body={r.body}
+              userimage={r.userimage}
+              created={r.created}
+              id={r.id}
+              favoriteCount={r.favoriteCount}
+              badCount={r.badCount}
+            />
+          ))}
+        <p className="text-smaller">{error}</p>
+      </div>
     </>
   );
 };

@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../components/Auth/Auth";
 import { Link } from "react-router-dom";
-import { ReactComponent as MainIcon } from "../Icons/MainIcon.svg";
-import { ReactComponent as CircleIcon } from "../Icons/CircleIcon.svg";
+import { ReactComponent as OnlytextIcon } from "../Icons/Onlytext.svg";
 import ProfilePhoto from "../Parts/ProflePhoto";
-import ClickAwayListener from '@mui/material/ClickAwayListener';
+
 
 const Nav = () => {
   const { currentUser } = useContext(AuthContext);
@@ -24,7 +23,7 @@ const Nav = () => {
             state: { fromDashboard: true }
           }} 
           >
-            <MainIcon />
+            <OnlytextIcon />
           </Link>
           <div>only text</div>
         </div>
@@ -65,6 +64,17 @@ const Nav = () => {
                 <li>
                   <Link
                     to={{
+                      pathname: `/tagindex`,
+                      state: { fromDashboard: true },
+                    }}
+                    className="dropdown__list">
+                      <span><i className="uil uil-list-ul"></i></span>
+                      <p>taglist</p>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={{
                       pathname: `/login`,
                       state: { fromDashboard: true },
                     }}
@@ -74,29 +84,42 @@ const Nav = () => {
                     <p>logout</p>
                   </Link>
                 </li>
+            </ul> 
+          </>          
+        ) : (
+          <>
+            <i 
+            open={open}
+            onClick={() => { setOpen(prev => !prev) }}
+            className="uil uil-user"></i>
+            <ul
+            onClick={() => { setOpen(false) }}
+            className={open ? "open__dropdown__lists" : "dropdown__lists"}>
                 <li>
                   <Link
                     to={{
                       pathname: `/tagindex`,
                       state: { fromDashboard: true },
                     }}
-                    className="dropdown__list"
-                    >
-                    <span><i className="uil uil-list-ul"></i></span>
-                    <p>taglist</p>
+                    className="dropdown__list">
+                      <span><i className="uil uil-list-ul"></i></span>
+                      <p>taglist</p>
                   </Link>
                 </li>
-            </ul> 
-          </>          
-        ) : (
-          <Link
-          to={{
-            pathname: `/login`,
-            state: { fromDashboard: true },
-          }}
-          >
-            <i className="uil uil-user"></i>
-          </Link>
+                <li>
+                  <Link
+                    to={{
+                      pathname: `/login`,
+                      state: { fromDashboard: true },
+                    }}
+                    className="dropdown__list"
+                    >
+                    <span><i className="uil uil-user-plus"></i></span>
+                    <p>login</p>
+                  </Link>
+                </li>
+            </ul>
+          </>
         )}
         </div>
       </div>

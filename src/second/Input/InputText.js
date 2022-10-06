@@ -19,11 +19,13 @@ const InputText = React.memo(({
 				</div>
 				<div className="textarea-c">
                     <img src={currentUser.photoURL} alt="profile-image" />
-					<textarea
-					placeholder="文字だけで思いを伝えてみましょう"
-					value={text}
-					onChange={inputText}
-					/>
+					<div className="input-textarea-c">
+						<textarea
+						placeholder="文字だけで思いを伝えてみましょう"
+						value={text}
+						onChange={inputText}
+						/>
+					</div>
 				</div>
 			</div>
 		)

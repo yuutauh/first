@@ -5,11 +5,13 @@ service cloud.firestore {
     match /threads/{threadId} {
       allow read;
       allow create: if isSignedIn() &&
+                    isUserValid(request.auth) && 
                     isThreadValidate(request.resource.data)
                     && request.resource.data.id == threadId
                     && request.resource.data.body != "";
                     
       allow update: if isSignedIn() &&
+                    isUserValid(request.auth) && 
                     isThreadValidate(request.resource.data)
                        
       allow delete: if isSignedIn() &&
@@ -18,8 +20,10 @@ service cloud.firestore {
       match /comments/{commentId} {
          allow read;
          allow create: if isSignedIn() &&
+                        isUserValid(request.auth) && 
                         isCommentValidate(request.resource.data);
          allow update: if isSignedIn() &&
+                       isUserValid(request.auth) && 
                        isCommentValidate(request.resource.data)
      }
     }
@@ -27,21 +31,25 @@ service cloud.firestore {
     match /tags/{tagsId} {
       allow read;
       allow create: if isSignedIn() &&
+                    isUserValid(request.auth) && 
                     isTagValidate(request.resource.data)&&
                     request.resource.data.id == tagsId;
       allow update: if isSignedIn() &&
+                    isUserValid(request.auth) && 
                     isTagValidate(request.resource.data)
     }
     
     match /followings/{followingId} {
       allow read;
       allow create: if isSignedIn() &&
+                   isUserValid(request.auth) && 
                    isFavoritesValidate(request.resource.data) &&
                    request.resource.data.followed
                    + 
                    request.resource.data.following 
                    == followingId ;
       allow delete: if isSignedIn() &&
+                   isUserValid(request.auth) && 
                    request.auth.uid == resource.data.following || 
                    request.auth.uid == resource.data.followed
     }
@@ -54,11 +62,18 @@ service cloud.firestore {
     match /users/{users} {
       allow read;
       allow create: if isSignedIn();
-      allow update: if request.auth.uid == resource.data.uid
+      allow update: if request.auth.uid == resource.data.uid &&
+                       request.resource.data.uid == resource.data.uid &&
+                       request.resource.data.photoURL == resource.data.photoURL &&
+                       request.resource.data.displayName == resource.data.displayName
     }
     
     function isSignedIn() {
         return request.auth != null;
+    }
+    
+    function isUserValid(auth) {
+        return auth.token.firebase.sign_in_provider in ['twitter.com', 'google.com']
     }
     
     function isOwner(newData) {

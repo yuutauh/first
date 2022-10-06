@@ -40,9 +40,6 @@ const Home = () => {
 							<Route path="/tags/:tag">
 								<Tags />
 							</Route>
-							<Route path="/trends/:tag">
-								<Trends />
-							</Route>
 							<Route exact path="/profile/:profile">
 								<Profile />
 							</Route>

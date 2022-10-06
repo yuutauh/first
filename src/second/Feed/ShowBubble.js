@@ -277,34 +277,35 @@ const ShowBubble = () => {
             </div>
           </div>
           <ToastContainer />
-          <div className="bubble-show-comment-textarea-wraper">
-            {currentUser && (
-              <div className="bubble-profile-circle">
-                <img src={currentUser.photoURL} alt="profile" />
-              </div>
-            )}
-            <textarea
-              placeholder="コメントをかく"
-              onChange={(e) => {
-                setComment(e.target.value);
-              }}
-              ref={textareaRef}
-            ></textarea>
+          {currentUser && (
+            <div className="bubble-show-comment-textarea-wraper">
+            <div className="bubble-profile-circle">
+              <img src={currentUser.photoURL} alt="profile" />
+            </div>
+            <div className="bubble-show-textarea-c">
+              <textarea
+                placeholder="コメントをかく"
+                onChange={(e) => {
+                  setComment(e.target.value);
+                }}
+                ref={textareaRef}
+              ></textarea>
+            </div>
             <button 
             className="bubble-show-comment-button"
             onClick={() => {
               const isValidate = validate()
               if(isValidate) {
                  addComment()
-              } else {
-                console.log("validate")
-                return false
-              }
+                } else {
+                  return false
+                }
               }}
             >
               <span><i className="uil uil-plus"></i></span>
             </button>
-          </div>
+            </div>
+          )}
           <p className="error text-smaller">{commentError}</p>
           <h4>comments</h4>
           <div className="comments">

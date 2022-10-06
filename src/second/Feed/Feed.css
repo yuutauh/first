@@ -230,8 +230,9 @@ small {
 
 .home-header h1 {
 	letter-spacing: .2rem;
-	margin-bottom: 1rem;
-	color: #5e5e5e;
+    margin-bottom: 1rem;
+    font-weight: 200;
+    font-size: 2.3rem;
 }
 
 .feeds-c {
@@ -255,23 +256,23 @@ small {
 }
 
 .bubble {
-	background: #fafafad9;
-    border-radius: 0px 15px 15px 15px;
 	max-width: 85%;
 }
 
 .bubble-msg {
+	border-radius: 0px 15px 15px 15px;
 	color: #222;
-	position: relative;
-	padding: 40px 30px;
+	padding: 40px 30px 0;
 	word-break: break-all;
-	box-shadow: 0 2px 4px #4385bb12;
     font-size: 14px;
     line-height: 30px;
     letter-spacing: 0.1em;
 	font-family: "メイリオ","Hiragino kaku Gothic Pro",sans-serif;
 	white-space: pre-wrap;
 	min-width: 200px;
+	background: #e0e0e0;
+	box-shadow:  7px 7px 14px #c3c3c3,
+	-7px -7px 14px #fdfdfd;
 }
 
 
@@ -306,19 +307,26 @@ small {
 
 .bubble-action-buttons {
 	display: flex;
-	position: absolute;
 	right: 10px;
 	flex-wrap: wrap;
+	padding: .5rem 0;
 }
 
 .bubble-action-buttons .bubble-numbar {
-	font-size: 12px;
+	display: block;
+    font-size: 12px;
+    text-align: center;
+    width: 30px;
+    border-radius: 146px;
+    background: #e0e0e0;
+    box-shadow: inset 7px 7px 14px #bababa, inset -7px -7px 14px #ffffff;
 }
 
 .bubble-action-buttons i,
 .bubble-action-buttons svg {
 	font-size: 1rem;
 	width: 1rem;
+	margin-right: 0.3rem;
 }
 
 .bubble-action-button  {

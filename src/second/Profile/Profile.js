@@ -24,7 +24,6 @@ const Profile = () => {
   const [IsCurrentUser, setIsCurrentUser] = useState(false);
   const [index, setIndex] = useState(1);
   const [tags, setTags] = useState([]);
-  const [favoriteIndex, setFavoriteIndex] = useState({});
   const [editText, setEditText] = useState("");
   const [isEdit, setIsEdit] = useState(false)
   const [editError, setEditError] = useState("");
@@ -45,6 +44,7 @@ const Profile = () => {
   };
 
   const [reorder, setReorder] = useLocalStorage("profile");
+  const [favoriteIndex, setFavoriteIndex] = useLocalStorage("favoriteprofile");
 
   const [element, setElement] = useState(null);
   const observer = React.useRef(
@@ -122,28 +122,43 @@ const Profile = () => {
   useEffect(() => {
     if (reorder === null) {
       setReorder({ order: "created", by: "asc" });
-    }
-    db.collection("threads")
-      .where("uid", "==", id)
-      .orderBy(reorder.order, reorder.by)
-      .limit(3)
-      .get()
-      .then((docs) => {
-        const items = [];
-        const lastDoc = docs.size === 0 ? "" : docs.docs[docs.docs.length - 1];
-        docs.forEach((doc) => {
-          items.push(doc.data());
+      db.collection("threads")
+        .where("uid", "==", id)
+        .orderBy("created", "asc")
+        .limit(3)
+        .get()
+        .then((docs) => {
+          const items = [];
+          const lastDoc = docs.size === 0 ? "" : docs.docs[docs.docs.length - 1];
+          docs.forEach((doc) => {
+            items.push(doc.data());
+          });
+          setThreads(items);
+          setLastDoc(lastDoc);
         });
-        setThreads(items);
-        setLastDoc(lastDoc);
-      });
+    } else {
+        db.collection("threads")
+        .where("uid", "==", id)
+        .orderBy(reorder.order, reorder.by)
+        .limit(3)
+        .get()
+        .then((docs) => {
+          const items = [];
+          const lastDoc = docs.size === 0 ? "" : docs.docs[docs.docs.length - 1];
+          docs.forEach((doc) => {
+            items.push(doc.data());
+          });
+          setThreads(items);
+          setLastDoc(lastDoc);
+        });
+    }
   }, [id, reorder]);
 
   const load = () => {
     if (reorder === null) {
       setReorder({ order: "created", by: "desc" });
     }
-    if (lastDoc !== "") {
+    if (lastDoc !== "" && reorder !== null) {
       db.collection("threads")
         .where("uid", "==", id)
         .orderBy(reorder.order, reorder.by)
@@ -176,7 +191,9 @@ const Profile = () => {
       .set({
         following: uid,
         followed: id,
-      });
+      }).then(() => {
+        setIsFollowing(true)
+      })
   };
 
   const unfollow = () => {
@@ -185,7 +202,8 @@ const Profile = () => {
     }
     db.collection("followings")
       .doc(`${id}` + `${uid}`)
-      .delete();
+      .delete()
+      .then(() => { setIsFollowing(false) })
   };
 
   const show = () => {
@@ -251,10 +269,13 @@ const Profile = () => {
             {isEdit ? (
               <>
                 <h5>自己紹介</h5>
-                <textarea
-                value={editText}
-                onChange={(e) => {setEditText(e.target.value)}}
-                 />
+                <div className="input-textarea-c">
+                  <textarea
+                  value={editText}
+                  onChange={(e) => {setEditText(e.target.value)}}
+                  placeholder="自己紹介"
+                  />
+                </div>
                 <div className="profile-text-edit-input">
                   <span 
                   data-tooltip="変更を適応する" 
@@ -343,12 +364,21 @@ const Profile = () => {
               isEmpty={isEmpty}
               lastDoc={lastDoc}
               setElement={setElement}
+              reorder={reorder}
               setReorder={setReorder}
+              favoriteIndex={favoriteIndex}
               setFavoriteIndex={setFavoriteIndex}
             />
           )}
           {index == 2 && (
-            <FavoriteBodyList name={displayUser.displayName} id={id} />
+            <FavoriteBodyList 
+            name={displayUser.displayName} 
+            id={id} 
+            reorder={reorder}
+            setReorder={setReorder}
+            favoriteIndex={favoriteIndex}
+            setFavoriteIndex={setFavoriteIndex}
+            />
           )}
           {index == 3 && (
             <Following

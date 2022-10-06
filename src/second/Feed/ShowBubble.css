@@ -36,14 +36,14 @@
     margin: 20px;
     position: relative;
     padding: 40px 30px;
-    word-break: break-all;
-    box-shadow: 0 2px 4px #4385bb12;
     font-size: 14px;
     line-height: 30px;
     letter-spacing: 0.1em;
-    background: #fafafad9;
     white-space: pre-wrap;
     border-radius: 0px 15px 15px 15px;
+	background: #e0e0e0;
+	box-shadow:  7px 7px 14px #c3c3c3,
+	-7px -7px 14px #fdfdfd;
 }
 
 .bubble-show-created {
@@ -107,10 +107,16 @@
 	gap: 1rem;
 }
 
+.bubble-show-textarea-c {
+	background: #e0e0e0;
+    border-radius: 5px;
+    width: 80%;
+	padding: 10px;
+    box-shadow: inset 2px 2px 5px #b8b9be,inset -3px -3px 7px #fff!important;
+}
+
 .bubble-show-comment-textarea-wraper textarea {
 	font-family: 'Poppins';
-	background: #FAFAFA;
-	box-shadow: 0 2px 4px #4385bb12;
 	width: 100%;
 	height: 59px;
 	margin: 0 auto;
@@ -118,6 +124,7 @@
 	border-radius: 5px;
 	outline: none;
 	resize: none;
+	box-shadow: none;
 }
 
 .bubble-show-comment-content {
@@ -129,28 +136,26 @@
 
 .bubble-msg-comment {
 	white-space: pre-wrap;
-    background: #FAFAFA;
     color: #222;
     position: relative;
     padding: 30px;
     word-break: break-all;
-    box-shadow: 0 2px 4px #4385bb12;
     font-size: 14px;
     line-height: 30px;
     letter-spacing: 0.1em;
-    font-family: "メイリオ","Hiragino kaku Gothic Pro",sans-serif;
     border-radius: 0px 15px 15px 15px;
     min-width: 250px;
     min-height: 100px;
+    background: #e0e0e0;
+    box-shadow: 7px 7px 14px #c3c3c3, -7px -7px 14px #fdfdfd;
 }
 
 .bubble-show-comment-button {
-	background-color: #fff;
-    border: 1px solid #5c93bb2b;
-    box-shadow: 0 2px 3px -2px #21253840;
     padding: 10px 10px;
     margin: 5px;
-    border-radius: 4px;
+    border-radius: 50px;
+	background: #e0e0e0;
+    box-shadow: 7px 7px 14px #c3c3c3, -7px -7px 14px #fdfdfd;
 }
 
 .bubble-comment-action-buttons {

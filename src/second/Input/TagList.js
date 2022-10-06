@@ -26,7 +26,6 @@ const TagList = React.memo(
 
     const inputUntags = (untags) => {
       inputSearch(tag, untags);
-      console.log("inputTags");
     };
 
     const inputTag = (tag) => {
@@ -120,7 +119,6 @@ const TagList = React.memo(
           .get()
           .then((res) => {
             const size = res.size <= 7;
-            console.log(res.size);
             if (!size) {
               const items = [];
               const lastDoc = res.docs[0];
@@ -223,7 +221,11 @@ const TagList = React.memo(
         </div>
         <p className="text-smaller">タグを選択する</p>
         <div className="tags-pagination">
-          {IsLeft && <i className="uil uil-angle-left" onClick={prevload}></i>}
+          {IsLeft && 
+            <div className="previous-button" onClick={prevload}>
+               Previous
+            </div>  
+          }
           <div className="tags">
             {tagList &&
               tagList.map((tag, i) => (
@@ -238,7 +240,11 @@ const TagList = React.memo(
                 />
               ))}
           </div>
-          {IsRight && <i className="uil uil-angle-right" onClick={load}></i>}
+          {IsRight && 
+          <div className="next-button" onClick={load}>
+            Next
+          </div>
+          }
         </div>
         {tagError && <p className="error">{tagError}</p>}
         <p className="text-smaller">新しいタグをつくる</p>

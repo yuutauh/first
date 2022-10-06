@@ -28,6 +28,8 @@
     transform: translate(-50%, -50%);
     width: 60px;
     border-radius: 50%;
+	background: linear-gradient(145deg, #f0f0f0, #cacaca);
+    box-shadow: 11px 11px 22px #5a5a5a, -11px -11px 22px #ffffff;
 }
 
 
@@ -53,7 +55,7 @@
 	align-items: center;
 	justify-content:center;
 	flex-wrap: wrap;
-	margin: 0.5rem 0;
+	margin: 1rem 0;
 }
 
 .profile-container .tags span {
@@ -66,11 +68,10 @@
 	border-radius: 4px;
     padding: 4px 12px;
     transition: all .15s ease;
-	font-size: 13px;
+    font-size: 13px;
     line-height: 24px;
-	margin-bottom: 10px;
-	margin-right: 10px;
-	box-shadow: 0 0 0 1px #0000001a inset;
+    margin-bottom: 10px;
+    margin-right: 10px;
 }
 
 .follow-button {
@@ -167,13 +168,13 @@
 
 textarea {
 	font-family: 'Poppins';
-	padding: 10px;
+    padding: 10px;
     border-radius: 10px;
     margin: 1rem 0;
     width: 80%;
-	box-shadow: 0 2px 4px #4385bb12;
-	outline: none;
-	resize: none;
+    outline: none;
+    resize: none;
+    background: #e0e0e0;
 }
 
 .profile-text-edit-input span {
@@ -399,7 +400,32 @@ textarea {
 	display: none !important;
   }
   
-
-.search-nav-on {
-	color: rgb(102 24 0);
+.active-search-nav {
+	font-weight: bold;
 }
+
+.profile-search-nav {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem auto 2rem;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.profile-search-nav div {
+	padding: 10px;
+    border-radius: 10px;
+    margin-right: 0.5rem;
+    flex: 1 1;
+    font-family: Poppins;
+    font-size: 0.8rem;
+    background: #e0e0e0;
+    box-shadow: 7px 7px 14px #c3c3c3, -7px -7px 14px #fdfdfd;
+}
+
+@media screen and (max-width: 750px){
+	.profile-search-nav div  {
+		font-size: .5rem;
+	}
+ }
