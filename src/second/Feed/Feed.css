@@ -226,6 +226,7 @@ small {
 .home-header {
 	text-align: center;
 	padding: 70px;
+	color: #31344b;
 }
 
 .home-header h1 {
@@ -260,7 +261,7 @@ small {
 }
 
 .bubble-msg {
-	border-radius: 0px 15px 15px 15px;
+	border-radius: 0px 30px 30px 30px;
 	color: #222;
 	padding: 40px 30px 0;
 	word-break: break-all;
@@ -271,8 +272,7 @@ small {
 	white-space: pre-wrap;
 	min-width: 200px;
 	background: #e0e0e0;
-	box-shadow:  7px 7px 14px #c3c3c3,
-	-7px -7px 14px #fdfdfd;
+	box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
 }
 
 

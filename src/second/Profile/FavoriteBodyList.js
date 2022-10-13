@@ -42,8 +42,22 @@ const FavoriteBodyList = React.memo(({
   useEffect(() => {
     if (favoriteIndex === null) {
       setFavoriteIndex({ order: "created", by: "desc" });
-    }
-    db.collection("threads")
+      db.collection("threads")
+        .where("favorites", "array-contains", id)
+        .orderBy("created", "created")
+        .limit(3)
+        .get()
+        .then((res) => {
+          const items = [];
+          const lastDoc = res.docs[res.docs.length - 1];
+          res.forEach((doc) => {
+            items.push(doc.data());
+          });
+          setThreads(items);
+          setLastDoc(lastDoc);
+        });
+    } else {
+      db.collection("threads")
       .where("favorites", "array-contains", id)
       .orderBy(favoriteIndex.order, favoriteIndex.by)
       .limit(3)
@@ -57,6 +71,7 @@ const FavoriteBodyList = React.memo(({
         setThreads(items);
         setLastDoc(lastDoc);
       });
+    }
   }, [id, favoriteIndex]);
 
   const load = () => {

@@ -2,6 +2,7 @@ import React from 'react';
 import { ReactComponent as BadIcon } from "../Icons/BadIcon.svg";
 import { ReactComponent as LoveIcon } from "../Icons/LoveIcon.svg";
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import { ja } from 'date-fns/locale';	
 import { Link } from 'react-router-dom';
 
 const Bubble = ({
@@ -28,7 +29,7 @@ const Bubble = ({
 					{body}
 					<div className="bubble-action-buttons">
 						<div className="bubble-action-button text-muted">
-					        {formatDistanceToNow(created.toDate()) + "ago"}
+							{formatDistanceToNow(created.toDate(), {locale: ja}) + "前"}
 						</div>
 						<div className='bubble-action-button'>
 							<LoveIcon />

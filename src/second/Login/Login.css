@@ -73,3 +73,14 @@
 	margin-bottom: 2rem;
 }
 
+.loginmsg-container button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 10px;
+    font-family: 'Poppins';
+    letter-spacing: .3rem;
+    background-color: #e0e0e0;
+	color: #31344b;
+    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
+}
+

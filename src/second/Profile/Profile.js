@@ -211,10 +211,12 @@ const Profile = () => {
       <>
         {IsFollowing ? (
           <button className="unfollow follow-button" onClick={unfollow}>
+            <span><i className="uil uil-user-minus"></i></span>
             フォロー解除
           </button>
         ) : (
           <button className="follow-button" onClick={follow}>
+            <span><i className="uil uil-user-plus"></i></span>
             フォローする
           </button>
         )}

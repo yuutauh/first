@@ -55,7 +55,7 @@
     font-family: Poppins;
     font-size: 0.8rem;
     background: #e0e0e0;
-    box-shadow: 7px 7px 14px #c3c3c3, -7px -7px 14px #fdfdfd;
+    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
 }
 
 .search-nav div:first-child {
@@ -72,20 +72,11 @@
 }
 
 .search-tags-c {
-	width: 80%;
-	margin: 0 auto;
 	text-align: center;
 }
 
-.search-profile-c {
-	width: 80%;
-	margin: 0 auto;
-}
-
 .search-profile {
-	background-color: #fff;
 	border-radius: 12px;
-    box-shadow: 0 2px 4px #4385bb12;
 	display: flex;
     flex-direction: column;
 }
@@ -95,7 +86,6 @@
     grid-gap: 1rem;
     gap: 1rem;
     padding: 10px;
-	border-bottom: 1px solid #5c93bb2b;
 }
 
 .active-search-nav {

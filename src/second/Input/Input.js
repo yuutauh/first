@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useContext } from 'react';
-import { BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import { Redirect, Route } from "react-router-dom";
 import { AuthContext } from '../../components/Auth/Auth';
 import { db, fb } from "../../firebase";
 import { v4 as uuidv4 } from "uuid";
@@ -91,6 +92,7 @@ export const Input = ({ history }) => {
 					})
 				})
 			)
+			.then(() => { toast("投稿しました") })
 			.then(() => { history.goBack() })
 	    }
 	}

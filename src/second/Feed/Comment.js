@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../../firebase";
+import { Link } from 'react-router-dom';
 import { ReactComponent as CircleIcon } from "../Icons/CircleIcon.svg";
 import { ReactComponent as BadIcon } from "../Icons/BadIcon.svg";
 import { ReactComponent as LoveIcon } from "../Icons/LoveIcon.svg";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import { ja } from 'date-fns/locale';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -128,7 +130,14 @@ const Comment = ({
           </div>
         </div>
         <div>
-          <p>{comment.username}</p>
+          <Link
+          to={{
+            pathname: `/profile/${comment.uid}`,
+            state: { fromDashboard: true },
+          }}
+          >
+            <p>{comment.username}</p>
+          </Link>
           <div className="bubble-show">
               <div className="bubble-msg-comment">
                 {comment.comment}
@@ -136,7 +145,7 @@ const Comment = ({
                 <div className="bubble-action-button text-muted">
                   {comment.created && (
                     <>
-                      {formatDistanceToNow(comment.created.toDate()) + "ago"}
+                      {formatDistanceToNow(comment.created.toDate(), {locale: ja}) + "前"}
                     </>
                   )}
                 </div>

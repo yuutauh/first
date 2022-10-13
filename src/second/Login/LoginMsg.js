@@ -6,12 +6,13 @@ const LoginMsg = () => {
 	const history = useHistory();
 	const msg = params.login
     let decoded = decodeURI(msg);
-	console.log(decoded)
+	
 
 	return (
 		<div className="loginmsg-container">
+			<p>ようこそ</p>
 			<h2>{decoded}</h2>
-			<p onClick={() => { history.push('/') }}>ホームへ</p>
+			<button onClick={() => { history.push('/') }}>ホームへ</button>
 		</div>
 	)
 }

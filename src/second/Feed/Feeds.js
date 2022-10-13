@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 import { AuthContext } from "../../components/Auth/Auth";
 import { db } from "../../firebase";
 import Bubble from "./Bubble";
-import { ReactComponent as BubbleIcon } from "../Icons/BubbleIcon.svg";
+import WelcomeModal from "./WelcomeModal";
 import "./Feed.css";
 import { Link } from "react-router-dom";
 
@@ -10,6 +11,7 @@ const Feeds = () => {
   const [threads, setThreads] = useState([]);
   const [lastDoc, setLastDoc] = useState("");
   const [isEmpty, setIsEmpty] = useState(false);
+  const [isModal, setIsModal] = useState(false);
   const { currentUser } = useContext(AuthContext);
 
   const observer = React.useRef(
@@ -38,6 +40,15 @@ const Feeds = () => {
         setThreads(items);
         setLastDoc(lastDoc);
       });
+    const keyName = "visited";
+    const keyValue = true;
+
+    if (!localStorage.getItem(keyName)) {
+      localStorage.setItem(keyName, keyValue);
+      setIsModal(true);
+    } else {
+      setIsModal(false);
+    }
 
     return () => { console.clear() }
   }, []);
@@ -89,50 +100,51 @@ const Feeds = () => {
     fetcher.current = Fetchmore;
   }, [Fetchmore]);
 
-
   return (
-    <div className="feeds-c">
-      <div className="home-header">
-        <h1>only text</h1>
-        <p className="bubble-subtitle">
-          なにか投稿してみましょう！
-          <br />
-          文字だけで思いをつたえてみましょう
-        </p>
+    <>
+      <ToastContainer />
+      <WelcomeModal isModal={isModal} setIsModal={setIsModal} />
+      <div className="feeds-c">
+        <div className="home-header">
+          <h1>only text</h1>
+          <p className="bubble-subtitle">
+            なにか投稿してみましょう！
+            <br />
+            文字だけで思いをつたえてみましょう
+          </p>
+        </div>
+        {threads &&
+          threads.map((thread, i) => (
+            <Bubble
+              key={i}
+              body={thread.body}
+              userimage={thread.userimage}
+              created={thread.created}
+              id={thread.id}
+              favoriteCount={thread.favoriteCount}
+              badCount={thread.badCount}
+            />
+          ))}
+
+        <Link
+          className="float"
+          to={{
+            pathname: `/input`,
+            state: { fromDashboard: true },
+          }}
+        >
+          <span data-tooltip="投稿" data-flow="top" className="my-float">
+            <i className="uil uil-plus"></i>
+          </span>
+        </Link>
+        {isEmpty && <p className="text-smaller">これ以上ありません</p>}
+        <button
+          ref={setElment}
+          onClick={Fetchmore}
+          className="loadButton"
+        ></button>
       </div>
-      {threads &&
-        threads.map((thread, i) => (
-          <Bubble
-            key={i}
-            body={thread.body}
-            userimage={thread.userimage}
-            created={thread.created}
-            id={thread.id}
-            favoriteCount={thread.favoriteCount}
-            badCount={thread.badCount}
-          />
-        ))}
-	  
-      <Link
-	  className="float"
-	  to={{
-	  pathname: `/input`,
-	  state: { fromDashboard: true },
-	  }}>
-        <span
-        data-tooltip="投稿" 
-        data-flow="top" 
-        className="my-float">
-          <i className="uil uil-plus"></i>
-        </span>
-	  </Link>
-      {isEmpty && <p className="text-smaller">これ以上ありません</p>}
-      <button
-        ref={setElment}
-        onClick={Fetchmore}
-        className="loadButton"
-      ></button>
-    </div>
+    </>
   );
 };
 

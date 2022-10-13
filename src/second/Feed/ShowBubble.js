@@ -65,13 +65,13 @@ const ShowBubble = () => {
         .update(o)
         .then(() => {
           setIsFavorite(true);
+          toast("いいねしました");
         })
     }
   };
 
   const offFavorites = () => {
     if (currentUser == null || currentUser.isAnonymous) {
-      console.log("asdc");
       return false;
     } else {
       const count = thread.favoriteCount - 1
@@ -88,6 +88,7 @@ const ShowBubble = () => {
         .update(os)
         .then(() => {
           setIsFavorite(false);
+          toast("いいねを解除しました");
         })
     }
   };
@@ -107,6 +108,7 @@ const ShowBubble = () => {
         .update(b)
         .then(() => {
           setIsBad(true)
+          toast("いやだねしました");
         })
     }
   }
@@ -126,6 +128,7 @@ const ShowBubble = () => {
       .update(bs)
       .then(() => {
         setIsBad(false)
+        toast("いやだねを解除しました");
       })
     }
   }

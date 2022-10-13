@@ -42,8 +42,7 @@
     white-space: pre-wrap;
     border-radius: 0px 15px 15px 15px;
 	background: #e0e0e0;
-	box-shadow:  7px 7px 14px #c3c3c3,
-	-7px -7px 14px #fdfdfd;
+	box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
 }
 
 .bubble-show-created {
@@ -147,7 +146,7 @@
     min-width: 250px;
     min-height: 100px;
     background: #e0e0e0;
-    box-shadow: 7px 7px 14px #c3c3c3, -7px -7px 14px #fdfdfd;
+    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
 }
 
 .bubble-show-comment-button {
@@ -230,4 +229,8 @@
 
 .error {
 	color: red;
+}
+
+.welcome-modal {
+	background-color: #e0e0e0e1 !important;
 }

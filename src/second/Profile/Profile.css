@@ -75,16 +75,17 @@
 }
 
 .follow-button {
-	background-color: #fff;
-    border: 1px solid #5c93bb2b;
-    box-shadow: 0 2px 3px -2px #21253840;
-    padding: 5px 10px;
+	background: #e0e0e0;
+    padding: 10px 20px;
     margin: 5px;
     border-radius: 4px;
+	box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
+	color: #31344b;
 }
 
 .unfollow {
-	color: red;
+	color: #ae0000;
+	box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
 }
 
 .profile-container .profile-text {
@@ -405,6 +406,7 @@ textarea {
 }
 
 .profile-search-nav {
+	width: 90%;
 	display: flex;
     align-items: center;
     justify-content: center;
@@ -421,7 +423,7 @@ textarea {
     font-family: Poppins;
     font-size: 0.8rem;
     background: #e0e0e0;
-    box-shadow: 7px 7px 14px #c3c3c3, -7px -7px 14px #fdfdfd;
+    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
 }
 
 @media screen and (max-width: 750px){

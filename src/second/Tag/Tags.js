@@ -9,6 +9,7 @@ import Follower from "./Follower";
 import LeftArrow from "../Parts/LeftArrow";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from "react-router-dom";
 
 const Tags = () => {
   const [tag, setTag] = useState("");
@@ -91,8 +92,7 @@ const Tags = () => {
 
     db.collection("tags")
       .where("name", "==", decoded)
-      .get()
-      .then((docs) => {
+      .onSnapshot((docs) => {
         const i = [];
         docs.forEach((doc) => {
           i.push(doc.data());
@@ -215,6 +215,7 @@ const Tags = () => {
                       offFavorites();
                     }}
                   >
+                    <span><i className="uil uil-minus"></i></span>
                     フォロー中
                   </button>
                 ) : (
@@ -224,6 +225,7 @@ const Tags = () => {
                       onFavorites();
                     }}
                   >
+                    <span><i className="uil uil-check"></i></span>
                     フォローする
                   </button>
                 )}
@@ -314,6 +316,19 @@ const Tags = () => {
                 <Follower userId={tag.userId} />
               </div>
             )}
+            <Link
+              className="float"
+              to={{
+              pathname: `/input`,
+              state: { fromDashboard: true },
+              }}>
+                  <span
+                  data-tooltip="投稿" 
+                  data-flow="top" 
+                  className="my-float">
+                    <i className="uil uil-plus"></i>
+                  </span>
+            </Link>
           </>
         ) : (
           <p>話題が見つかりません</p>
