@@ -5,6 +5,7 @@ import { ReactComponent as HashIcon } from "../Icons/HashIcon.svg";
 import './Tag.css';
 import { Link } from 'react-router-dom';
 import LeftArrow from '../Parts/LeftArrow';
+import MetaDecorator from '../Meta/MetaDecorator';
 
 const TagIndex = () => {
 	const { currentUser } = useContext(AuthContext);
@@ -116,6 +117,10 @@ const TagIndex = () => {
 	return (
 		<>
 		<LeftArrow />
+		<MetaDecorator 
+          title={"tag一覧 - onlytext"} 
+          description={"onlytext tagの一覧"} 
+        />
 		<div className='tagindex-c'>
 			<div className="tagindex-h">
 			   <h4>tags</h4>

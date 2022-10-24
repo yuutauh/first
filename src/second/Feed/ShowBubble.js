@@ -3,6 +3,7 @@ import { db, fb } from "../../firebase";
 import { AuthContext } from "../../components/Auth/Auth";
 import { ReactComponent as BadIcon } from "../Icons/BadIcon.svg";
 import { ReactComponent as LoveIcon } from "../Icons/LoveIcon.svg";
+import { ReactComponent as TwitterIcon } from "../Icons/TwitterIcon.svg";
 import { v4 as uuidv4 } from "uuid";
 import {Link} from "react-router-dom";
 import { format } from "date-fns";
@@ -10,6 +11,7 @@ import { ja } from "date-fns/locale";
 import Comment from "./Comment";
 import LeftArrow from "../Parts/LeftArrow";
 import { ToastContainer, toast } from 'react-toastify';
+import MetaDecorator from "../Meta/MetaDecorator";
 import 'react-toastify/dist/ReactToastify.css';
 import "./Feed.css";
 import "./ShowBubble.css";
@@ -24,6 +26,7 @@ const ShowBubble = () => {
   let id = window.location.pathname.split("/body/")[1];
   const { currentUser } = useContext(AuthContext);
   const textareaRef = useRef();
+
 
   useEffect(() => {
     db.collection("threads")
@@ -179,10 +182,13 @@ const ShowBubble = () => {
 		return true
 	}
 
+  const shareTwitter =  async() => {}
+
   return (
     <>
       <LeftArrow />
       {thread && (
+        <>
         <div className="bubble-show-c">
           {isFavorite ? (
             <div className="bubble-show-poster">
@@ -278,6 +284,15 @@ const ShowBubble = () => {
                 {comments.length}
               </div>
             </div>
+            <div className="bubble-show-action-button">
+              <a 
+              href="https://twitter.com/share?ref_src=twsrc%5Etfw" 
+              className="twitter-share-button" 
+              target="_blank"
+              data-show-count="false">
+                <TwitterIcon />
+              </a>
+            </div>
           </div>
           <ToastContainer />
           {currentUser && (
@@ -328,6 +343,7 @@ const ShowBubble = () => {
             )}
           </div>
         </div>
+      </>
       )}
     </>
   );

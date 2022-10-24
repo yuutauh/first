@@ -234,3 +234,19 @@
 .welcome-modal {
 	background-color: #e0e0e0e1 !important;
 }
+
+.twitter-share-button {
+	background: #e0e0e0;
+    box-shadow: 3px 3px 6px #b8b9be, -3px -3px 6px #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+}
+
+.twitter-share-button > svg {
+	color: rgb(29, 155, 240);
+    fill: rgb(29, 155, 240);
+	width: 20px;
+	height: 20px;
+}

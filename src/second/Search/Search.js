@@ -4,6 +4,7 @@ import SearchSpeech from "./SearchSpeech";
 import SearchTags from "./SearchTags";
 import SearchProfile from "./SearchProfile";
 import LeftArrow from "../Parts/LeftArrow";
+import MetaDecorator from "../Meta/MetaDecorator";
 
 const Search = () => {
   const [search, setSearch] = useState("");
@@ -12,6 +13,10 @@ const Search = () => {
   return (
     <div>
       <LeftArrow />
+      <MetaDecorator 
+          title={"Search - onlytext"} 
+          description={"onlytext で検索"} 
+          />
       <div className="search-w">
         <div className="search-c">
           <h2>onlytext</h2>

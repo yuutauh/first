@@ -3,13 +3,14 @@ import { db } from "../../firebase";
 import { AuthContext } from "../../components/Auth/Auth";
 import { useLocation } from "react-router-dom";
 import Bubble from "../Feed/Bubble";
-import "../Feed/Feed.css";
-import "./Tag.css";
 import Follower from "./Follower";
 import LeftArrow from "../Parts/LeftArrow";
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { Link } from "react-router-dom";
+import MetaDecorator from "../Meta/MetaDecorator";
+import 'react-toastify/dist/ReactToastify.css';
+import "../Feed/Feed.css";
+import "./Tag.css";
 
 const Tags = () => {
   const [tag, setTag] = useState("");
@@ -204,6 +205,10 @@ const Tags = () => {
           <>
             <LeftArrow />
             <ToastContainer />
+            <MetaDecorator 
+              title={ tag.name + "- tag - onlytext"} 
+              description={"onlytext" + tag.name} 
+            />
             <div className="taglist-h">
               <h4>topic</h4>
               <div className="taglist-i">

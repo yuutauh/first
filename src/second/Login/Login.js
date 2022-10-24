@@ -4,8 +4,10 @@ import { ReactComponent as GoogleIcon } from "../../Icons/GoogleIcon.svg";
 import { ReactComponent as TwitterIcon } from "../../Icons/TwitterIcon.svg";
 import { ReactComponent as MainIcon } from "../Icons/MainIcon.svg";
 import { auth, fb, db } from "../../firebase";
-import "./Login.css";
 import LeftArrow from "../Parts/LeftArrow";
+import MetaDecorator from "../Meta/MetaDecorator";
+import "./Login.css";
+
 
 const Login = () => {
   const history = useHistory();
@@ -77,6 +79,10 @@ const Login = () => {
   return (
     <>
       <LeftArrow />
+      <MetaDecorator
+      title={"Login - onlytext"}
+      description={"only text をはじめましょう。googleもしくはtwitterアカウントでログインできます。"}
+      />
       <div className="main-container">
         <div className="login-container">
           <h1>Log in</h1>

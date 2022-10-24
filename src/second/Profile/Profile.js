@@ -11,6 +11,7 @@ import UserBodyList from "../../components/User/UserBodyList";
 import FavoriteBodyList from "./FavoriteBodyList";
 import LeftArrow from "../Parts/LeftArrow";
 import ProfileBubble from "./ProfileBubble";
+import MetaDecorator from "../Meta/MetaDecorator";
 
 
 const Profile = () => {
@@ -260,6 +261,10 @@ const Profile = () => {
     <>
       {displayUser ? (
         <div>
+          <MetaDecorator 
+          title={displayUser.displayName + "- onlytext"} 
+          description={displayUser.profile} 
+          />
           <LeftArrow />
           <div className="profile-container">
           <h4>profile</h4>

@@ -9,6 +9,47 @@ const cors = require('cors')({origin: true});
 require('dotenv').config();
 
 admin.initializeApp();
+const db = admin.firestore();
+
+exports.returnOgp = functions.https.onRequest((req, res) => {
+	const [, , bodyid] = req.path.split('/')
+	return db.collection('threads').doc(bodyid).get().then((snap) => {
+		if (!snap) {
+			res.status(404).end('404 Not Found')
+			return
+		}
+		const item = snap ? snap.data() : {}
+		const itemBody  =  item.body || ""
+		const html = createHtml(itemBody, bodyid)
+		res.set('Cache-Control', 'public, max-age=600, s-maxage=600')
+		res.status(200).end(html)
+		return
+	})
+})
+
+const createHtml = (description, bodyid) => {
+	const SITEURL = "https://onlytext.net"
+	const PAGEURL = `${SITEURL}/body/${bodyid}`
+	return `<!DOCTYPE html>
+  <html>
+	<head>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+	  <title>${description}</title>
+	  <meta name="twitter:site" content="${SITEURL}">
+      <meta property="twitter:description" content="${description}$ />
+      <meta property="twitter:title" content="onlytext"/>
+      <meta property="twitter:image" content="https://firebasestorage.googleapis.com/v0/b/onepage-9981b.appspot.com/o/ogp-image%2Ftwitter-card.png?alt=media&token=cdedf797-1cb0-4de1-b28d-53ba3b6b8364" />
+      <meta property="twitter:url" content="${PAGEURL}"/>
+      <meta name="twitter:card" content="summary"/>
+	</head>
+	<body>
+	  <script type="text/javascript">window.location="/";</script>
+	</body>
+  </html>
+  `
+}
+
 
 // exports.setAdminClaim = functions
 //     .firestore

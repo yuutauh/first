@@ -12,6 +12,10 @@
     ],
     "rewrites": [
       {
+        "source": "/body/*",
+        "function": "returnOgp"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
