@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import { auth } from '../../firebase';
+import { auth,fb } from '../../firebase';
 
 export const AuthContext = React.createContext();
  
@@ -9,9 +9,20 @@ export const Auth = ({children}) => {
 
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((user) =>{
-			setCurrentUser(user);
-			setLoading(false)
-			console.clear()
+			if(!user) {
+				fb
+				.auth()
+				.signInAnonymously()
+				.then((user) => {
+					setCurrentUser(user);
+					setLoading(false)
+					console.clear()
+				})
+			} else {
+				setCurrentUser(user);
+				setLoading(false)
+				console.clear()
+			}
 		})
 
 		return unsubscribe

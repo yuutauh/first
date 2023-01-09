@@ -28,8 +28,8 @@ const Comment = ({
   },[])
 
   const onFavorites = (commentId) => {
-    if (currentUser == null) {
-      console.log("asdc");
+    if (currentUser == null || currentUser.isAnonymous == true) {
+      toast("ログインしてください");
       return false;
     } else {
       const count = comment.favoriteCount + 1
@@ -50,8 +50,8 @@ const Comment = ({
   };
 
   const offFavorites = (commentId) => {
-    if (currentUser == null) {
-      console.log("asdc");
+    if (currentUser == null || currentUser.isAnonymous == true) {
+      toast("ログインしてください");
       return false;
     } else {
       const count = comment.favoriteCount - 1
@@ -76,7 +76,8 @@ const Comment = ({
   };
 
   const onBads = (commentId) => {
-    if(currentUser == null) {
+    if(currentUser == null || currentUser.isAnonymous == true) {
+      toast("ログインしてください");
       return false
     } else {
       const count = comment.badCount + 1
@@ -97,7 +98,8 @@ const Comment = ({
   }
 
   const offBads = (commentId) => {
-    if(currentUser == null) {
+    if(currentUser == null || currentUser.isAnonymous == true) {
+      toast("ログインしてください");
       return null
     } else {
       const count = comment.badCount - 1 

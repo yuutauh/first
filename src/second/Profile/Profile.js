@@ -3,6 +3,9 @@ import { AuthContext } from "../../components/Auth/Auth";
 import { db } from "../../firebase";
 import { Link, useParams } from "react-router-dom";
 import { ReactComponent as CircleIcon } from "../Icons/CircleIcon.svg";
+import AnonymousImage from'../Parts/anonymous.png';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./Profile.css";
 import Btn from "../Parts/Btn";
 import Following from "./Following";
@@ -184,7 +187,8 @@ const Profile = () => {
   };
 
   const follow = () => {
-    if (currentUser == null) {
+    if (currentUser == null || currentUser.isAnonymous == true) {
+      toast("ログインしてください")
       return false;
     }
     db.collection("followings")
@@ -198,7 +202,7 @@ const Profile = () => {
   };
 
   const unfollow = () => {
-    if (currentUser == null) {
+    if (currentUser == null || currentUser.isAnonymous == true) {
       return false;
     }
     db.collection("followings")
@@ -266,6 +270,7 @@ const Profile = () => {
           description={displayUser.profile} 
           />
           <LeftArrow />
+          <ToastContainer />
           <div className="profile-container">
           <h4>profile</h4>
             <div className="bubble-profile-circle">
@@ -403,7 +408,16 @@ const Profile = () => {
           )}
         </div>
       ) : (
-        <p>sorry! no user</p>
+        <div className="anonymous-profile">
+          <LeftArrow />
+          <div className="profile-container">
+            <div className="bubble-profile-circle">
+                <img src={AnonymousImage} alt="profile" />
+                <CircleIcon />
+              </div>
+            <p>このユーザーは匿名でログインしています</p>
+          </div>
+        </div>
       )}
     </>
   );

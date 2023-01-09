@@ -69,6 +69,21 @@ const Login = () => {
       });
   };
 
+  
+  const authWithAnonymous = () => {
+    fb.auth()
+      .signInAnonymously()
+      .then((user) => {
+        if(!user) {
+          return
+        } else {
+          history.push(`/login/welcome`);
+        }
+      })
+
+  }
+	
+
   const logout = () => {
     let p = "ログアウトしました";
     auth.signOut().then(() => {
@@ -100,6 +115,7 @@ const Login = () => {
             </span>
             log-out
           </div>
+          {/* <button onClick={authWithAnonymous}>anonymous</button> */}
           <p className="text-muted">
             <Link
             to={{

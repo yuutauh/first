@@ -4,6 +4,8 @@ import { AuthContext } from "../../components/Auth/Auth";
 import { ReactComponent as BadIcon } from "../Icons/BadIcon.svg";
 import { ReactComponent as LoveIcon } from "../Icons/LoveIcon.svg";
 import { ReactComponent as TwitterIcon } from "../Icons/TwitterIcon.svg";
+import { TwitterShareButton } from 'react-share';
+import AnonymousImage from'../Parts/anonymous.png';
 import { v4 as uuidv4 } from "uuid";
 import {Link} from "react-router-dom";
 import { format } from "date-fns";
@@ -11,7 +13,6 @@ import { ja } from "date-fns/locale";
 import Comment from "./Comment";
 import LeftArrow from "../Parts/LeftArrow";
 import { ToastContainer, toast } from 'react-toastify';
-import MetaDecorator from "../Meta/MetaDecorator";
 import 'react-toastify/dist/ReactToastify.css';
 import "./Feed.css";
 import "./ShowBubble.css";
@@ -54,7 +55,7 @@ const ShowBubble = () => {
   }, []);
 
   const onFavorites = () => {
-    if (currentUser == null) {
+    if (currentUser == null || currentUser.isAnonymous == true) {
       toast("ログインしてください");
       return false;
     } else {
@@ -74,7 +75,7 @@ const ShowBubble = () => {
   };
 
   const offFavorites = () => {
-    if (currentUser == null || currentUser.isAnonymous) {
+    if (currentUser == null || currentUser.isAnonymous == true) {
       return false;
     } else {
       const count = thread.favoriteCount - 1
@@ -97,7 +98,7 @@ const ShowBubble = () => {
   };
 
   const onBads = () => {
-    if(currentUser == null) {
+    if(currentUser == null || currentUser.isAnonymous == true) {
       toast("ログインしてください");
       return false
     } else {
@@ -117,7 +118,7 @@ const ShowBubble = () => {
   }
 
   const offBads = () => {
-    if(currentUser == null) {
+    if(currentUser == null || currentUser.isAnonymous == true) {
       return null
     } else {
       const count = thread.badCount - 1 
@@ -143,9 +144,9 @@ const ShowBubble = () => {
 				comment: comment,
 				id: id,
 				created: fb.firestore.FieldValue.serverTimestamp(),
-				uid: currentUser.uid,
-				username: currentUser.displayName,
-				userimage: currentUser.photoURL ,
+				uid: currentUser.isAnonymous == true ? "anonymous" : currentUser.uid,
+				username: currentUser.isAnonymous == true ? 'とくめいさん' : currentUser.displayName,
+				userimage: currentUser.isAnonymous == true ? AnonymousImage : currentUser.photoURL ,
 				favorites: [],
 				bads: [],
 				favoriteCount: 0,
@@ -181,8 +182,6 @@ const ShowBubble = () => {
 
 		return true
 	}
-
-  const shareTwitter =  async() => {}
 
   return (
     <>
@@ -285,29 +284,33 @@ const ShowBubble = () => {
               </div>
             </div>
             <div className="bubble-show-action-button">
-              <a 
-              href="https://twitter.com/share?ref_src=twsrc%5Etfw" 
+              <TwitterShareButton 
+              url={"https://onlytext.net"}
+              resetButtonStyle={false}
+              title={thread.body}
               className="twitter-share-button" 
-              target="_blank"
-              data-show-count="false">
+              >
                 <TwitterIcon />
-              </a>
+              </TwitterShareButton>
             </div>
           </div>
           <ToastContainer />
           {currentUser && (
             <div className="bubble-show-comment-textarea-wraper">
             <div className="bubble-profile-circle">
-              <img src={currentUser.photoURL} alt="profile" />
+              <img src={currentUser.isAnonymous == true ? AnonymousImage :currentUser.photoURL} alt="profile" />
             </div>
             <div className="bubble-show-textarea-c">
-              <textarea
-                placeholder="コメントをかく"
-                onChange={(e) => {
-                  setComment(e.target.value);
-                }}
-                ref={textareaRef}
-              ></textarea>
+              <p>{currentUser.isAnonymous == true ? "とくめいさん" :currentUser.displayName}</p>
+              <div>
+                <textarea
+                  placeholder="コメントをかく"
+                  onChange={(e) => {
+                    setComment(e.target.value);
+                  }}
+                  ref={textareaRef}
+                ></textarea>
+              </div>
             </div>
             <button 
             className="bubble-show-comment-button"

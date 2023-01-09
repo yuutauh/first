@@ -1,2 +1,6 @@
 node_modules/
 .env
+key.json
+trends.json
+ui-debug.log
+hosting/

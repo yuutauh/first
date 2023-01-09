@@ -5,9 +5,9 @@ import { useLocation } from "react-router-dom";
 import Bubble from "../Feed/Bubble";
 import Follower from "./Follower";
 import LeftArrow from "../Parts/LeftArrow";
-import { ToastContainer, toast } from 'react-toastify';
 import { Link } from "react-router-dom";
 import MetaDecorator from "../Meta/MetaDecorator";
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "../Feed/Feed.css";
 import "./Tag.css";
@@ -89,6 +89,8 @@ const Tags = () => {
             setLastDoc(lastDoc);
           }
         })
+
+  
     } 
 
     db.collection("tags")
@@ -130,9 +132,7 @@ const Tags = () => {
             setIsEmpty(true);
           }
         });
-    } else {
-      console.log("lastDoc is empty");
-    }
+    } 
   };
 
   useEffect(() => {
@@ -161,7 +161,7 @@ const Tags = () => {
   };
 
   const onFavorites = () => {
-    if (currentUser == null) {
+    if (currentUser == null || currentUser.isAnonymous == true) {
       toast("ログインしてください")
     } else {
       const count = tag.userCount + 1;
@@ -179,7 +179,7 @@ const Tags = () => {
   };
 
   const offFavorites = () => {
-    if (currentUser == null) {
+    if (currentUser == null || currentUser.isAnonymous == true) {
       toast("ログインしてください")
     } else {
       const o = tag.userId.filter((favorite) => favorite !== currentUser.uid);
@@ -269,7 +269,7 @@ const Tags = () => {
                       reorder?.by == "desc" 
                     ? "active-taglist-order-nav" : ""}
                     onClick={() => {
-                      setReorder({ order: "created", by: "desc" });
+                      setReorder({ order: "created", by: "desc" })
                     }}
                   >
                     新しい順

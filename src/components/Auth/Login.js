@@ -108,6 +108,10 @@ const Login = () => {
       db.collection('users').doc(user.user.uid).set(o, { merge: true})
     })
   }
+
+  const authWithAnonymous = () => {
+    console.log("anonymous")
+  }
 	
   const logout = () => {
     auth.signOut().then(() => {
@@ -138,6 +142,7 @@ const Login = () => {
 			    	<Span>ログアウト</Span>
 			  </Button>
       </div>
+      <button onClick={authWithAnonymous}>anonymous</button>
 		</div>
 	)
 }

@@ -4,7 +4,6 @@ import { AuthContext } from "../../components/Auth/Auth";
 import { db, storage } from "../../firebase";
 import Bubble from "./Bubble";
 import WelcomeModal from "./WelcomeModal";
-import MetaDecorator from "../Meta/MetaDecorator";
 import "./Feed.css";
 import { Link } from "react-router-dom";
 
@@ -14,10 +13,6 @@ const Feeds = () => {
   const [isEmpty, setIsEmpty] = useState(false);
   const [isModal, setIsModal] = useState(false);
   const { currentUser } = useContext(AuthContext);
-  var storageRef = storage.ref("ogp-image/twitter-card.png");
-  storageRef.getDownloadURL().then(function(url) {
-    console.log(url);
-  });
 
   const observer = React.useRef(
     new IntersectionObserver(
@@ -108,11 +103,6 @@ const Feeds = () => {
   return (
     <>
       <ToastContainer />
-      <MetaDecorator 
-      title={"Home - onlytext"} 
-      description={
-        "only text は文字のみの掲示板です。投稿者に関わらず内容のみで評価しましょう"
-      } />
       <WelcomeModal isModal={isModal} setIsModal={setIsModal} />
       <div className="feeds-c">
         <div className="home-header">

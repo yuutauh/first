@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useContext } from 'react';
+import AnonymousImage from'../Parts/anonymous.png';
 import { ToastContainer, toast } from 'react-toastify';
 import { Redirect, Route } from "react-router-dom";
 import { AuthContext } from '../../components/Auth/Auth';
@@ -54,9 +55,9 @@ export const Input = ({ history }) => {
 				body: text,
 				id: id,
 				created: fb.firestore.FieldValue.serverTimestamp(),
-				uid: currentUser.uid,
-				username: currentUser.displayName,
-				userimage: currentUser.photoURL,
+				uid: currentUser.isAnonymous == true ? "anonymous" : currentUser.uid,
+				username: currentUser.isAnonymous == true ? 'とくめいさん' : currentUser.displayName,
+				userimage: currentUser.isAnonymous == true ? AnonymousImage : currentUser.photoURL,
 				favorites: [],
 				bads: [],
 				favoriteCount: 0,

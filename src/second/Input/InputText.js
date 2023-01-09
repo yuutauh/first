@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthContext } from '../../components/Auth/Auth';
+import AnonymousImage from'../Parts/anonymous.png';
 
 
 const InputText = React.memo(({
@@ -18,13 +18,16 @@ const InputText = React.memo(({
 					))}
 				</div>
 				<div className="textarea-c">
-                    <img src={currentUser.photoURL} alt="profile-image" />
-					<div className="input-textarea-c">
-						<textarea
-						placeholder="文字だけで思いを伝えてみましょう"
-						value={text}
-						onChange={inputText}
-						/>
+                    <img src={currentUser.isAnonymous == true ? AnonymousImage : currentUser.photoURL} alt="profile-image" />
+					<div>
+						<p>{currentUser.isAnonymous == true ? 'とくめいさん' : currentUser.displayName}</p>
+						<div className="input-textarea-c">
+							<textarea
+							placeholder="文字だけで思いを伝えてみましょう"
+							value={text}
+							onChange={inputText}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
